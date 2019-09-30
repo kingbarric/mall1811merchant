@@ -5,7 +5,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '',   redirectTo: '/dashboard', pathMatch: 'full'},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent,
+ // canActivate: [AuthGuard],
+ 
+  loadChildren: () => import('./dashboard/dashboard.module').then(mod => mod.DashboardModule)
+
+}
 ];
 
 @NgModule({
