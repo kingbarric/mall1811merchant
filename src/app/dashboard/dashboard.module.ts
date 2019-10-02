@@ -14,12 +14,15 @@ import { CompletedOrderComponent } from '../completed-order/completed-order.comp
 import { TicketsComponent } from '../tickets/tickets.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { ProductsInventoryComponent } from '../products-inventory/products-inventory.component';
+import { ProductAddComponent } from '../product-add/product-add.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
   {path: '',   redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: DashboardHomeComponent},
   {path: 'product', component: ProductsComponent},
+  {path: 'add-product', component: ProductAddComponent},
   {path: 'product-inventory', component: ProductsInventoryComponent}, 
   {path: 'product-image', component: ProductImagesComponent},
   {path: 'product-edit', component: ProductEditComponent},
@@ -38,6 +41,7 @@ const routes: Routes = [
     DashboardHomeComponent, 
     DashboardHomeComponent,
     ProductsComponent, 
+    ProductAddComponent,
     ProductsOnsaleComponent,
     ProductsAuctionComponent,
     ProductsBidsComponent,
@@ -52,6 +56,8 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })
