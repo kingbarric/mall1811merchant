@@ -39,6 +39,23 @@ export class UtilService {
       title: message
     });
   }
+res = false;
+   confirm(message){
+   
+     Swal.fire({
+      title: 'Please confirm',
+      text: message,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ok'
+    }).then((result) => {
+      console.log(result)
+     return result.value;
+    })
+    return this.res;
+  }
 
   getItemFromCart(id) {
     const cartItems = JSON.parse(localStorage.getItem('cart'));

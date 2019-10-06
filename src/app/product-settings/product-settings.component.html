@@ -1,8 +1,54 @@
 <div>
-        <section class="panel important">
-            <h2 class="text-align-center">Add new product</h2>
-            <div>
-                
-            </div>
+    <section class="panel important">
+        <h2 class="text-align-center">Configure <i>{{existingProduct.name}} </i> </h2>
+
+    </section>
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <section class="panel important">
+                <h5 class="heads">Setup for sale or/and auction</h5>
+                <div class="panel">
+                    <form [formGroup]='form' (ngSubmit)="updateSaleAuction()">
+ 
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" formControlName="isUpforSale" class="custom-control-input" id="isUpforSale">
+                            <label class="custom-control-label" for="isUpforSale">Up for Sale</label>
+                        </div>
+
+                        <div class="custom-control custom-switch">
+                                <input type="checkbox" formControlName="isUpforAuction" class="custom-control-input" id="isUpforAuction">
+                                <label class="custom-control-label" for="isUpforAuction">Up for Auction</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Save changes
+                            </button>
+                    </form>
+                </div>
             </section>
+        </div>
+        <div class="col-md-6">
+                <section class="panel important">
+                    <h5 class="heads">Update inventory (currently <b class="">{{existingProduct.quantity}}</b>)</h5>
+                    <div class="panel">
+                        <form [formGroup]='formInventory' (ngSubmit)="saveInventory()">
+     
+                            <div class="form-group">
+                                <input type="number" placeholder="Qauntity" formControlName="quantity" class="form-control" id="qauntity">
+                               
+                            </div>
+    
+                            <div class="form-group">
+                                    <input type="text" placeholder="Note" formControlName="note" class="form-control" id="note">
+                                  
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Save changes
+                                </button>
+                        </form>
+                    </div>
+                </section>
             </div>
+    </div>
+</div>

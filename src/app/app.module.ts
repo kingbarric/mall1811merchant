@@ -13,8 +13,7 @@ import { ProductSettingsComponent } from './product-settings/product-settings.co
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent,
-    ProductSettingsComponent 
+    LoginComponent 
   ],
   imports: [
     BrowserModule,

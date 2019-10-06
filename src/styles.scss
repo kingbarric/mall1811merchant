@@ -209,7 +209,16 @@ footer[role=contentinfo] {
   & > h2, & > ul {
     margin: 1rem;
   }
- 
+ padding: 5px;
+}
+
+.heads{
+  color:#fff;
+  padding: 10px;
+  text-align: center;
+  background-color: darken($accent-positive, 15%);
+  box-shadow: 0px 1px 1px 0px;
+  margin-bottom: 10px;
 }
 
 
@@ -218,6 +227,7 @@ a{
   text-decoration:none;
   color:inherit;
 }
+
 h2,
 h3,
 h4 {
@@ -240,6 +250,7 @@ ul, li{
     padding: 0;
 }
 main{
+  padding: 1rem;
     li {
       position: relative;
       padding-left: 1.2em;

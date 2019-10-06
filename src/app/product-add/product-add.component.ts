@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -10,18 +10,23 @@ import { UtilService } from '../services/util.service';
   templateUrl: './product-add.component.html',
   styleUrls: ['./product-add.component.scss']
 })
-export class ProductAddComponent implements OnInit {
+export class ProductAddComponent implements OnInit, OnDestroy {
 
   form: FormGroup;  
   msg='';
   categories=[];
   subCategories = [{'id':0,'name':'Select Category first'}];
   subCategoryId = 0;
+  existingProduct = null;
+  productId = 0;
+  titleText = 'Add new product'
   constructor(private auth: AuthService, private route: Router, 
     private crudService: CrudService, private utilService: UtilService) { }
 
   ngOnInit() {
+    this.isProductExist();
     this.initForm();
+    
     this.getCategories();
   }
 
@@ -38,6 +43,18 @@ export class ProductAddComponent implements OnInit {
       salePrice: new FormControl('', [Validators.required]),
       categoryId: new FormControl('', [Validators.required])
     });
+
+    if(this.existingProduct !=null){
+      console.log(this.existingProduct);
+      this.form.controls.name.patchValue(this.existingProduct.name);
+      this.form.controls.description.patchValue(this.existingProduct.description);
+      this.form.controls.fullDescription.patchValue(this.existingProduct.fullDescription);
+      this.form.controls.fullSpecification.patchValue(this.existingProduct.fullSpecification);
+      this.form.controls.quantity.patchValue(this.existingProduct.quantity);
+      this.form.controls.saleDiscountPrice.patchValue(this.existingProduct.discountPrice);
+      this.form.controls.salePrice.patchValue(this.existingProduct.price);
+      this.form.controls.categoryId.patchValue(this.existingProduct.categoryId);
+    }
   }
 
   saveProduct(){
@@ -47,7 +64,7 @@ let subCat = {};
     }
     const data = {
      
-      productId:0,
+      productId:this.productId,
       name: this.form.controls.name.value,
       description: this.form.controls.description.value,
       fullDescription: this.form.controls.fullDescription.value,
@@ -115,4 +132,21 @@ let subCat = {};
       this.subCategories = [{'id':0,'name':'No sub category'}]
     }
   }
+
+  isProductExist(){
+    const pro = JSON.parse(localStorage.getItem('product'));
+    if(pro !=null){
+      console.log('productssss');
+      this.existingProduct = pro;
+      this.titleText = `Update ${pro.name}`;
+      this.productId = pro.id;
+    }else{
+      console.log('none')
+    }
+  }
+
+  ngOnDestroy(){
+    localStorage.removeItem('product');
+  }
+  
 }

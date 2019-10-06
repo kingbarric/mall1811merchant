@@ -1,13 +1,13 @@
-<section class="panel important">
+ 
 
   <div>
-    <a   class="btn btn-primary" routerLink="/dashboard/add-product">
+    <a   class="btn btn-success" routerLink="/dashboard/add-product">
       Add new product
     </a>
   </div>
-</section>
+ 
 
-<section class="panel ">
+<section class="panel  important">
   <h2>List of products</h2>
   <!-- 
     adminMarkupPercentage: 10
@@ -41,10 +41,11 @@ salePrice: 880
       <th>Is up for auction</th>
       <th>Date added</th>
       <th>Settings</th>
+      <th>Edit</th>
     </tr>
     <tr *ngFor="let pro of products">
       <td>{{pro.id}}</td>
-      <td>{{pro.name}}</td>
+      <td>{{pro.name }}</td>
       <td>{{pro.price}}</td>
       <td>{{pro.saleDiscountPrice}}</td>
       <td>{{pro.quantity}}</td>
@@ -52,8 +53,16 @@ salePrice: 880
       <td>{{pro.isUpforauction}}</td>
       <td>{{pro.isUpforsale}}</td>
       <td>{{pro.dateAdded}}</td>
-      <td><button class="btn btn-warning btn-small">Configure</button></td>
-
+      <td>
+          <a   class="btn btn-warning" (click)="productSettings(pro)" >
+            Configure
+          </a>
+      </td>
+      <td>
+          <a   class="btn btn-success" (click)="editProduct(pro)" >
+            edit
+          </a>
+      </td>
 
     </tr>
    

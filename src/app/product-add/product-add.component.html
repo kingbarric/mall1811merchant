@@ -1,18 +1,18 @@
 <div>
     <section class="panel important">
-        <h2 class="text-align-center">Add new product</h2>
+        <h2 class="text-align-center">{{titleText}}</h2>
         <form [formGroup]='form' (ngSubmit)="saveProduct()">
           <div class="twothirds">
             <label for="name">Name</label>
             <input type="text" formControlName="name" name="name" id="name" placeholder="Name of product" />
 
-            <label for="name">Brief Description</label>
+            <label for="name">Overview</label>
             <input type="text" name="description" id="description"  formControlName="description" placeholder="Description" />
     
-            <label for="textarea">Full Description:</label>
+            <label for="textarea"> Description:</label>
             <textarea cols="40" rows="6" name="fulldescription" formControlName="fullDescription" id="textarea"></textarea>
     
-            <label for="textarea">Full Specification:</label>
+            <label for="textarea"> Specification:</label>
             <textarea cols="40" rows="6" name="fullSpecification" id="fullSpecification" formControlName="fullSpecification"></textarea>
           </div>
           <div class="onethird">

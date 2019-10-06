@@ -16,6 +16,7 @@ import { ProfileComponent } from '../profile/profile.component';
 import { ProductsInventoryComponent } from '../products-inventory/products-inventory.component';
 import { ProductAddComponent } from '../product-add/product-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductSettingsComponent } from '../product-settings/product-settings.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'product-inventory', component: ProductsInventoryComponent}, 
   {path: 'product-image', component: ProductImagesComponent},
   {path: 'product-edit', component: ProductEditComponent},
+  {path: 'product-settings', component: ProductSettingsComponent},
   {path: 'product-onsale', component: ProductsOnsaleComponent},
   {path: 'product-auction', component: ProductsAuctionComponent},
   {path: 'product-bids', component: ProductsBidsComponent},
@@ -52,7 +54,8 @@ const routes: Routes = [
     ProductImagesComponent,
     ProductEditComponent,
     ProductWonbidsComponent,
-    ProductsInventoryComponent
+    ProductsInventoryComponent,
+    ProductSettingsComponent
   ],
   imports: [
     CommonModule,
