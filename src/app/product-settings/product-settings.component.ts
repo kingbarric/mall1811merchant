@@ -22,7 +22,11 @@ export class ProductSettingsComponent implements OnInit {
   subCategoryId = 0;
   existingProduct = null;
   productId = 0;
-  titleText = 'Add new product'
+  titleText = 'Add new product';
+  imageFile;
+  public imagePath;
+  imgURL: any;
+  public message: string;
   constructor(private auth: AuthService, private route: Router,
     private crudService: CrudService, private utilService: UtilService) { }
 
@@ -141,7 +145,52 @@ export class ProductSettingsComponent implements OnInit {
 
   }
 
+  uploadChange(files){
+    this.imageFile =  files[0];
+    if (files.length === 0)
+    return;
+
+  var mimeType = files[0].type;
+  if (mimeType.match(/image\/*/) == null) {
+    this.message = "Only images are supported.";
+    return;
+  }
+
+  var reader = new FileReader();
+  this.imagePath = files;
+  reader.readAsDataURL(files[0]); 
+  reader.onload = (_event) => { 
+    this.imgURL = reader.result; 
+  }
+  }
  
+  addImage() {
+   
+    
+
+    const url = 'product/uploadimage';
+
+    // console.log(data);
+    const fd = new FormData();
+    fd.append('file', this.imageFile );
+    fd.append('id', this.existingProduct.id);
+   // console.log(file)
+
+    this.crudService.postUpload(url, fd)
+      .then((res: any) => {
+        console.log(res)
+        if (res.code === 0) {
+          this.utilService.toast('success', res.message);
+        }
+      })
+      .catch(e => this.utilService.toast('error', 'There was an error while uploading image'));
+  }
+
+
+ 
+  preview(files) {
+  
+  }
 
 }
 

@@ -17,7 +17,9 @@ import { ProductsInventoryComponent } from '../products-inventory/products-inven
 import { ProductAddComponent } from '../product-add/product-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductSettingsComponent } from '../product-settings/product-settings.component';
-
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 const routes: Routes = [
   {path: '',   redirectTo: 'home', pathMatch: 'full'},
@@ -61,6 +63,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RichTextEditorAllModule,
+    Ng2SearchPipeModule,
+    NgxPaginationModule,
     RouterModule.forChild(routes)
   ]
 })

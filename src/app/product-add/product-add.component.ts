@@ -19,7 +19,9 @@ export class ProductAddComponent implements OnInit, OnDestroy {
   subCategoryId = 0;
   existingProduct = null;
   productId = 0;
-  titleText = 'Add new product'
+  titleText = 'Add new product';
+  fullSpecification =`<p>full specification</p>`;
+  fulldescription = `<p>full description</p>`;
   constructor(private auth: AuthService, private route: Router, 
     private crudService: CrudService, private utilService: UtilService) { }
 

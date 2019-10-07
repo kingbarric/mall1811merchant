@@ -1,35 +1,38 @@
  
 
-  <div>
-    <a   class="btn btn-success" routerLink="/dashboard/add-product">
-      Add new product
-    </a>
-  </div>
+ 
  
 
 <section class="panel  important">
   <h2>List of products</h2>
-  <!-- 
-    adminMarkupPercentage: 10
-averageRatings: 0
-categoryId: {id: 7, name: "Video Games", description: "for stationary", dateAdded: "2019-03-19", addedBy: 38, …}
-dateAdded: 1544572800000
-description: "nice texts"
-discountPrice: 300
-fullDescription: null
-fullSpecification: null
-id: 3
-isUpforauction: true
-isUpforsale: true
-name: "Board chalk"
-price: 800
-productHashCategories: []
-quantity: 139
-ratingsCount: 0
-saleDiscountPrice: 330
-salePrice: 880
-   -->
-  <table>
+  
+    <div class="row">
+      <div class="col-md-6">
+          <div>
+              <a   class="btn btn-success" routerLink="/dashboard/add-product">
+                Add new product
+              </a>
+            </div>
+      </div>
+      <div class="col-md-6"> 
+        
+      
+      
+        <div class="wrap">
+            <div class="search">
+               <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search" [(ngModel)]="filter">
+               <button type="submit" class="searchButton">
+                 <i class="fa fa-search"></i>
+              </button>
+            </div>
+         </div>
+      
+      </div>
+    </div>
+       
+   
+  <table class="rwd-table">
+      <tbody>
     <tr>
       <th>ID</th>
       <th>Name</th>
@@ -43,7 +46,8 @@ salePrice: 880
       <th>Settings</th>
       <th>Edit</th>
     </tr>
-    <tr *ngFor="let pro of products">
+    <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
+    <tr *ngFor="let pro of products | paginate: { itemsPerPage: 10, currentPage: p  } | filter:filter; let i = index ">
       <td>{{pro.id}}</td>
       <td>{{pro.name }}</td>
       <td>{{pro.price}}</td>
@@ -55,18 +59,21 @@ salePrice: 880
       <td>{{pro.dateAdded}}</td>
       <td>
           <a   class="btn btn-warning" (click)="productSettings(pro)" >
-            Configure
+              <i class="fa fa-cog" aria-hidden="true"></i>
           </a>
       </td>
       <td>
           <a   class="btn btn-success" (click)="editProduct(pro)" >
-            edit
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </a>
       </td>
 
     </tr>
-   
+   </tbody>
   </table>
+  <div class="paginate-tabs">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
 </section>
 
  

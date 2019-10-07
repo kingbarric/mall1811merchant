@@ -36,4 +36,14 @@ export class CrudService {
       .post(`${this.baseUrl}${url}`, data, { headers: this.headers })
       .toPromise();
   }
+
+  postUpload(url, data) {
+    const head = new HttpHeaders(
+      {
+      //  'Content-Type': 'multipart/form-data',
+        'Authorisation': `Token ${this.utilService.getToken()}`
+      }
+    );
+    return this.http.post(`${this.baseUrl}${url}`, data, { headers: head }).toPromise();
+  }
 }

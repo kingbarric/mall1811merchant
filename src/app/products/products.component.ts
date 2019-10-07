@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class ProductsComponent implements OnInit {
 products =[] ;
   constructor(private crudService : CrudService, private router: Router) { }
-
+  p: number = 1;
   ngOnInit() {
     this.findAll();
   }

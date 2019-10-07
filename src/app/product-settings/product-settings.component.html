@@ -51,4 +51,29 @@
                 </section>
             </div>
     </div>
+
+    <section class="panel important">
+                    <h5 class="heads">Add image for products</h5>
+                 
+    <div class="row">
+        <div class="col-md-6">
+                <div class="twothirds"> <div class="form-group mb-0">
+                        
+                        <div class="custom-file">
+                                <span style="color:red;" *ngIf="message">{{message}}</span>
+                                
+                                
+                          <input #file type="file" accept='image/*' class="custom-file-input" name="example-file-input-custom"
+                            (change)="uploadChange(file.files)">
+                          <label class="custom-file-label">Upload Image</label>
+                        </div>
+                       
+                      </div></div>
+                <div class="onethird"> <button class="btn btn-warning" (click)="addImage()">Save Image</button></div>
+               
+        </div>
+        <div class="col-md-6"><img [src]="imgURL" height="100px" *ngIf="imgURL"></div>
+    </div>
+   
+    </section>
 </div>

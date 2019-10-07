@@ -7,13 +7,15 @@
             <input type="text" formControlName="name" name="name" id="name" placeholder="Name of product" />
 
             <label for="name">Overview</label>
-            <input type="text" name="description" id="description"  formControlName="description" placeholder="Description" />
+            <input type="text" name="description" id="description"  formControlName="description" placeholder="Product overview" />
     
             <label for="textarea"> Description:</label>
-            <textarea cols="40" rows="6" name="fulldescription" formControlName="fullDescription" id="textarea"></textarea>
-    
+            <!-- <textarea cols="40" rows="6" name="fulldescription" formControlName="fullDescription" id="textarea"></textarea> -->
+            <ejs-richtexteditor [(value)]='fulldescription' required name="name" [(ngModel)]="fulldescription"></ejs-richtexteditor>
+           
             <label for="textarea"> Specification:</label>
-            <textarea cols="40" rows="6" name="fullSpecification" id="fullSpecification" formControlName="fullSpecification"></textarea>
+            <!-- <textarea cols="40" rows="6" name="fullSpecification" id="fullSpecification" formControlName="fullSpecification"></textarea> -->
+            <ejs-richtexteditor [(value)]='fullSpecification' required name="name" [(ngModel)]="fullSpecification"></ejs-richtexteditor>
           </div>
           <div class="onethird">
 
