@@ -85,6 +85,8 @@ let subCat = {};
       console.log(e);
       if(e.code ==0){
         this.utilService.toast('success',e.message);
+      const p =   this.crudService.fetchAllProductFromApi();
+      this.utilService.saveAllProducts(p);
         this.route.navigate(['dashboard/product']);
       }else{
         this.utilService.toast('warning',e.message);
@@ -136,7 +138,7 @@ let subCat = {};
   }
 
   isProductExist(){
-    const pro = JSON.parse(localStorage.getItem('product'));
+    const pro = this.utilService.getProduct();
     if(pro !=null){
       console.log('productssss');
       this.existingProduct = pro;

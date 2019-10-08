@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from '../services/crud.service';
 import { Router } from '@angular/router';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-products',
@@ -9,25 +10,19 @@ import { Router } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
 products =[] ;
-  constructor(private crudService : CrudService, private router: Router) { }
+  constructor(private crudService : CrudService, private router: Router, private utilService :UtilService) { }
   p: number = 1;
   ngOnInit() {
     this.findAll();
   }
 
 
-  async findAll(){
-    await this.crudService.findAll('product/viewallbymerchant')
-    .then((e:any)=>{
-      console.log(e);
-      this.products = e;
-      this.products.reverse();
-
-    })
+    findAll(){
+  this.products = this.utilService.fetchAllProduct();
   }
 
   editProduct(pro){
-    localStorage.setItem('product',JSON.stringify(pro));
+    this.utilService.saveProduct(pro);
     this.router.navigate(['dashboard/add-product'])
     .then(e=>{
      
@@ -37,7 +32,7 @@ products =[] ;
 
   productSettings(pro){
     //
-    localStorage.setItem('product',JSON.stringify(pro));
+    this.utilService.saveProduct(pro);
     this.router.navigate(['dashboard/product-settings'])
     .then(e=>{
      
