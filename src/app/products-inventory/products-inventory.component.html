@@ -3,15 +3,63 @@
         <div class="col-md-4"><h5 class="p-3">Select Product to view Intentory history </h5></div>
         <div class="col-md-5">
                 <div class="box">
-                        <select>
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                          <option>Option 3</option>
-                          <option>Option 4</option>
-                          <option>Option 5</option>
+                        <select (change)="selected($event.target)" >
+                          <option *ngFor="let pro of products" value="{{pro.id}}">{{pro.name}}</option>
+                          
                         </select>
                       </div>
         </div>
-        <div class="col-md-3">Selected: </div>
+        <div class="col-md-3"><span *ngIf="pro !==null">Selected <b>{{pro.name}}  </b> <br/>Overview: <b>{{pro.description}} </b> </span></div>
     </div>
 </section>
+
+
+<section class="panel  important">
+        <h2>Inventories </h2>
+        
+          <div class="row">
+            <div class="col-md-6">
+                <div>
+                    
+                  </div>
+            </div>
+            <div class="col-md-6"> 
+              
+            
+            
+              <div class="wrap">
+                  <div class="search">
+                     <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search" [(ngModel)]="filter">
+                     <button type="submit" class="searchButton">
+                       <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+               </div>
+            
+            </div>
+          </div>
+             
+         
+        <table class="rwd-table">
+            <tbody>
+          <tr>
+            <th>ID</th>
+            <th>Quantity</th>
+            <th>Note</th>
+            <th>Date</th> 
+          </tr>
+          <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
+          <tr *ngFor="let pro of inventories | paginate: { itemsPerPage: 10, currentPage: p  } | filter:filter; let i = index ">
+            <td>{{pro.id}}</td>
+            <td>{{pro.quantity }}</td>
+            <td>{{pro.note}}</td>
+            <td>{{getDate(pro.dateAdded)}}</td> 
+          
+      
+          </tr>
+         </tbody>
+        </table>
+        <div class="paginate-tabs">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </section>

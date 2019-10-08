@@ -10,6 +10,7 @@ import { UtilService } from '../services/util.service';
 })
 export class ProductsComponent implements OnInit {
 products =[] ;
+pro ;
   constructor(private crudService : CrudService, private router: Router, private utilService :UtilService) { }
   p: number = 1;
   ngOnInit() {

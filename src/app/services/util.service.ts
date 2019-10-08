@@ -144,4 +144,9 @@ res = false;
     return JSON.parse(localStorage.getItem('product'));
   }
 
+  getDate(d){
+    
+    var date = new Date(d);
+    return date.toString();
+  }
 }
