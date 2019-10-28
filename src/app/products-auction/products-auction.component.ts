@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudService } from '../services/crud.service';
+import { Router } from '@angular/router';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-products-auction',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsAuctionComponent implements OnInit {
 
-  constructor() { }
-
+  products = [];
+  pro;
+  constructor(private crudService: CrudService, private router: Router, private utilService: UtilService) { }
+  p: number = 1;
   ngOnInit() {
+    this.findAll();
   }
 
+
+  findAll() {
+    const pro = this.utilService.fetchAllProduct();
+
+    this.crudService.findAll('auctionproduct/viewallbymerchant').then((e: any) => {
+      this.products = e;
+      console.log(this.products)
+
+    })
+    // pro.forEach((e) => {
+    //   if (e.isUpforauction === true) {
+    //     console.log(e.isUpforauction);
+    //     this.products.push(e);
+    //   }
+    // });
+  }
 }

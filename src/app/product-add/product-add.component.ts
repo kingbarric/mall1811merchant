@@ -12,30 +12,30 @@ import { UtilService } from '../services/util.service';
 })
 export class ProductAddComponent implements OnInit, OnDestroy {
 
-  form: FormGroup;  
-  msg='';
-  categories=[];
-  subCategories = [{'id':0,'name':'Select Category first'}];
+  form: FormGroup;
+  msg = '';
+  categories = [];
+  subCategories = [{ 'id': 0, 'name': 'Select Category first' }];
   subCategoryId = 0;
   existingProduct = null;
   productId = 0;
   titleText = 'Add new product';
-  fullSpecification =`<p>full specification</p>`;
+  fullSpecification = `<p>full specification</p>`;
   fulldescription = `<p>full description</p>`;
-  constructor(private auth: AuthService, private route: Router, 
+  constructor(private auth: AuthService, private route: Router,
     private crudService: CrudService, private utilService: UtilService) { }
 
   ngOnInit() {
     this.isProductExist();
     this.initForm();
-    
+
     this.getCategories();
   }
 
- 
- 
-  initForm(){
-    this.form =  new FormGroup({
+
+
+  initForm() {
+    this.form = new FormGroup({
       name: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
       fullDescription: new FormControl('', [Validators.required]),
@@ -46,7 +46,7 @@ export class ProductAddComponent implements OnInit, OnDestroy {
       categoryId: new FormControl('', [Validators.required])
     });
 
-    if(this.existingProduct !=null){
+    if (this.existingProduct != null) {
       console.log(this.existingProduct);
       this.form.controls.name.patchValue(this.existingProduct.name);
       this.form.controls.description.patchValue(this.existingProduct.description);
@@ -59,48 +59,50 @@ export class ProductAddComponent implements OnInit, OnDestroy {
     }
   }
 
-  saveProduct(){
-let subCat = {};
-    if(this.subCategoryId!=0){
-        subCat = {subCategoryId:this.subCategoryId};
+  saveProduct() {
+    let subCat = {};
+    if (this.subCategoryId != 0) {
+      subCat = { subCategoryId: this.subCategoryId };
     }
     const data = {
-     
-      productId:this.productId,
+
+      productId: this.productId,
       name: this.form.controls.name.value,
       description: this.form.controls.description.value,
-      fullDescription: this.form.controls.fullDescription.value,
-      fullSpecification: this.form.controls.fullSpecification.value,
+      fullDescription: this.fulldescription,
+      fullSpecification: this.fullSpecification,
       quantity: this.form.controls.quantity.value,
       discountPrice: this.form.controls.saleDiscountPrice.value,
-      price:this.form.controls.salePrice.value,
+      price: this.form.controls.salePrice.value,
       categoryId: this.form.controls.categoryId.value,
       subCategories: [subCat]
 
     }
 
-    console.log(data);
-    this.crudService.postAll('product/save',data)
-    .then((e:any)=>{
-      console.log(e);
-      if(e.code ==0){
-        this.utilService.toast('success',e.message);
-      const p =   this.crudService.fetchAllProductFromApi();
-      this.utilService.saveAllProducts(p);
-        this.route.navigate(['dashboard/product']);
-      }else{
-        this.utilService.toast('warning',e.message);
-      }
+    // console.log(data);
+    // console.log(this.fullSpecification);
+    // console.log(this.fulldescription);
+    this.crudService.postAll('product/save', data)
+      .then((e: any) => {
+        console.log(e);
+        if (e.code == 0) {
+          this.utilService.toast('success', e.message);
+          const p = this.crudService.fetchAllProductFromApi();
+          this.utilService.saveAllProducts(p);
+          this.route.navigate(['dashboard/product']);
+        } else {
+          this.utilService.toast('warning', e.message);
+        }
 
-    })
+      })
     // this.auth.login('product/save',data)
     // .then((e:any)=>{
-   
+
     //  if(e.code===0){
     //    //save success
-      
+
     //     this.route.navigate(["/dashboard/products"]);
-       
+
     //  }else{
     //   this.msg ='Error occured while saving products'; 
     //  }
@@ -108,49 +110,49 @@ let subCat = {};
     // })
   }
 
-  getCategories(){
+  getCategories() {
     this.crudService.findAll('productcategories/getwithsubcategories')
-    .then((e:any)=>{
-      if(e){
-        console.log(e)
-        this.categories= e;
-      }
-    });
+      .then((e: any) => {
+        if (e) {
+          console.log(e)
+          this.categories = e;
+        }
+      });
   }
 
-  getSubCategories(event){
-  this.subCategoryId = event.target.value;
-  console.log(event.target.value);
+  getSubCategories(event) {
+    this.subCategoryId = event.target.value;
+    console.log(event.target.value);
   }
-  populateSubCat(event){
+  populateSubCat(event) {
     const catId = event.target.value;
     console.log(catId);
     this.categories.forEach(element => {
-      if(element.categoryId==catId){
+      if (element.categoryId == catId) {
         this.subCategories = element.subCategories;
       }
-      
+
     });
 
-    if(this.subCategories.length==0){
-      this.subCategories = [{'id':0,'name':'No sub category'}]
+    if (this.subCategories.length == 0) {
+      this.subCategories = [{ 'id': 0, 'name': 'No sub category' }]
     }
   }
 
-  isProductExist(){
+  isProductExist() {
     const pro = this.utilService.getProduct();
-    if(pro !=null){
+    if (pro != null) {
       console.log('productssss');
       this.existingProduct = pro;
       this.titleText = `Update ${pro.name}`;
       this.productId = pro.id;
-    }else{
+    } else {
       console.log('none')
     }
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     localStorage.removeItem('product');
   }
-  
+
 }

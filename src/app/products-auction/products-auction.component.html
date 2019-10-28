@@ -1,1 +1,78 @@
-<p>products-auction works!</p>
+<section class="panel  important">
+        <h2>List of Product on Auction</h2>
+        
+          <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <a   class="btn btn-success" routerLink="/dashboard/add-product">
+                      Add new product
+                    </a>
+                  </div>
+            </div>
+            <div class="col-md-6"> 
+              
+            
+            
+              <div class="wrap">
+                  <div class="search">
+                     <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search" [(ngModel)]="filter">
+                     <button type="submit" class="searchButton">
+                       <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+               </div>
+            
+            </div>
+          </div>
+             
+         
+          <table class="rwd-table">
+              <tbody>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Discount Price</th>
+              <th>Quantity</th>
+              <th>Category</th>
+              <th>Is Approved</th>
+              <th>Is Active</th>
+              
+              <th>Is featured</th>
+              <th>Date added</th>
+              <th>View</th>
+            </tr>
+            <!-- <tr *ngFor="let pro 
+              
+              approved: true
+  approvedBy: null
+  dateAdded: "2019-04-03"
+  id: 1
+  isActive: true
+  isFeatured: true
+              of products | filter:filter; let i = index "> -->
+            <tr *ngFor="let pro of products | paginate: { itemsPerPage: 10, currentPage: p  } | filter:filter; let i = index ">
+              <td>{{pro.id}}</td>
+              <td>{{pro.productId.name }}</td>
+              <td>{{pro.productId.price}}</td>
+              <td>{{pro.productId.saleDiscountPrice}}</td>
+              <td>{{pro.productId.quantity}}</td>
+              <td>{{pro.productId.categoryId.name}}</td>
+              <td>{{pro.approved}}</td>
+              <td>{{pro.isActive}}</td>
+               
+                  <td>{{pro.isFeatured}}</td>
+              
+              <td>{{pro.dateAdded}}</td>
+             
+              <td>
+                  View
+              </td>
+        
+            </tr>
+           </tbody>
+          </table>
+        <div class="paginate-tabs">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </section>

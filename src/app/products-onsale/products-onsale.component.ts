@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudService } from '../services/crud.service';
+import { Router } from '@angular/router';
+import { UtilService } from '../services/util.service';
 
 @Component({
   selector: 'app-products-onsale',
@@ -6,10 +9,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./products-onsale.component.scss']
 })
 export class ProductsOnsaleComponent implements OnInit {
-
-  constructor() { }
-
+  products = [];
+  pro;
+  constructor(private crudService: CrudService, private router: Router, private utilService: UtilService) { }
+  p: number = 1;
   ngOnInit() {
+    this.findAll();
+  }
+
+
+  findAll() {
+   // const pro = this.utilService.fetchAllProduct();
+    this.crudService.findAll('productonsale/viewallfrommerchant').then((e: any) => {
+      console.log(e);
+      this.products = e;
+      console.log(this.products);
+    })
+    // pro.forEach((e) => {
+    //   if (e.isUpforsale == true) {
+    //     console.log(e.isUpforsale);
+    //     this.products.push(e);
+    //   }
+    // });
   }
 
 }

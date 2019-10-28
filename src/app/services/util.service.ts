@@ -14,7 +14,8 @@ export class UtilService {
   constructor(private router: Router) { }
 
   getToken() {
-    if (localStorage.getItem('objectid') !== null) {
+    if (localStorage.getItem('objectid') != null) {
+      console.log('token ',localStorage.getItem('objectid') );
       return  localStorage.getItem('objectid') 
     }
 
