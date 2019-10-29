@@ -16,10 +16,10 @@ import { ProfileComponent } from '../profile/profile.component';
 import { ProductsInventoryComponent } from '../products-inventory/products-inventory.component';
 import { ProductAddComponent } from '../product-add/product-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProductSettingsComponent } from '../product-settings/product-settings.component';
-import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { ProductSettingsComponent } from '../product-settings/product-settings.component'; 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import {NgxPaginationModule} from 'ngx-pagination';
+import {NgxPaginationModule} from 'ngx-pagination'; 
+import { CKEditorModule } from 'ngx-ckeditor';
 
 const routes: Routes = [
   {path: '',   redirectTo: 'home', pathMatch: 'full'},
@@ -62,10 +62,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
-    RichTextEditorAllModule,
+    ReactiveFormsModule, 
     Ng2SearchPipeModule,
     NgxPaginationModule,
+    CKEditorModule,
     RouterModule.forChild(routes)
   ]
 })

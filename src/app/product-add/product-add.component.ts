@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
@@ -11,6 +11,11 @@ import { UtilService } from '../services/util.service';
   styleUrls: ['./product-add.component.scss']
 })
 export class ProductAddComponent implements OnInit, OnDestroy {
+  @ViewChild("editor1", { static: false }) editor1: any;
+  @ViewChild("editor2", { static: false }) editor2: any;
+
+  ckeConfig: any;
+  ckeConfig2: any;
 
   form: FormGroup;
   msg = '';
@@ -30,9 +35,22 @@ export class ProductAddComponent implements OnInit, OnDestroy {
     this.initForm();
 
     this.getCategories();
+    this.configEditors();
   }
 
+  configEditors() {
+    this.ckeConfig = {
+      allowedContent: true,
+      extraPlugins: 'divarea',
+      forcePasteAsPlainText: true
+    };
 
+    this.ckeConfig2 = {
+      allowedContent: false,
+      extraPlugins: 'divarea',
+      forcePasteAsPlainText: true
+    };
+  }
 
   initForm() {
     this.form = new FormGroup({

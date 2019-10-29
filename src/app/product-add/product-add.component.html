@@ -1,58 +1,69 @@
 <div>
-    <section class="panel important">
-        <h2 class="text-align-center">{{titleText}}</h2>
-        <form [formGroup]='form' (ngSubmit)="saveProduct()">
-          <div class="twothirds">
-            <label for="name">Name</label>
-            <input type="text" formControlName="name" name="name" id="name" placeholder="Name of product" />
+  <section class="panel important">
+    <h2 class="text-align-center">{{titleText}}</h2>
+    <form [formGroup]='form' (ngSubmit)="saveProduct()">
+      <div class="twothirds">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" name="name" id="name" placeholder="Name of product" />
 
-            <label for="name">Overview</label>
-            <input type="text" name="description" id="description"  formControlName="description" placeholder="Product overview" />
-    
-            <label for="textarea"> Description:</label>
-            <!-- <textarea cols="40" rows="6" name="fulldescription" formControlName="fullDescription" id="textarea"></textarea> -->
-            <ejs-richtexteditor [(value)]='fulldescription' required name="name" [(ngModel)]="fulldescription"></ejs-richtexteditor>
-           
-            <label for="textarea"> Specification:</label>
-            <!-- <textarea cols="40" rows="6" name="fullSpecification" id="fullSpecification" formControlName="fullSpecification"></textarea> -->
-            <ejs-richtexteditor [(value)]='fullSpecification' required name="name" [(ngModel)]="fullSpecification"></ejs-richtexteditor>
-          </div>
-          <div class="onethird">
+        <label for="name">Overview</label>
+        <input type="text" name="description" id="description" formControlName="description"
+          placeholder="Product overview" />
 
-           
-                
-                        <label for="name">Price</label>
-                        <input type="text" name="price" id="price" placeholder="Product price" formControlName="salePrice" />
-                
-                        <label for="name">Discount price</label>
-                        <input type="text" formControlName="saleDiscountPrice" name="discountPrice" id="discountPrice" placeholder="Discount price" />
-              
-                        <label for="name">Qauntity</label>
-                        <input type="number" name="quantity" id="quantity" formControlName="quantity" placeholder="Initial Qauntity" />
+        <label for="textarea"> Description:</label>
+        <!-- <ckeditor [(ngModel)]="fulldescription" #editor="ngModel" name="editor" required [config]="ckeConfig"
+          debounce="500" (paste)="onPaste($event)" (change)="onChange($event)">
+        </ckeditor> -->
+        <!-- <textarea cols="40" rows="6" name="fulldescription" formControlName="fullDescription" id="textarea"></textarea> -->
+        <!-- <ejs-richtexteditor [(value)]='fulldescription' required name="name" [(ngModel)]="fulldescription"></ejs-richtexteditor> -->
 
-                        <label for="select-choice">Select Category:</label>
-                        <select #category name="categoryId" id="categoryId" formControlName="categoryId" (change)="populateSubCat($event)">
-                            <option value="">Please choose</option>
-                          <option *ngFor="let cat of categories" value="{{cat.categoryId}}">{{cat.categoryName}}</option>
-                         
-                        </select>
+        <label for="textarea"> Specification:</label>
+        <!-- <textarea cols="40" rows="6" name="fullSpecification" id="fullSpecification" formControlName="fullSpecification"></textarea> -->
+        <!-- <ejs-richtexteditor [(value)]='fullSpecification' required name="name" [(ngModel)]="fullSpecification"></ejs-richtexteditor> -->
 
-                        <label for="select-choice">Select Sub Category:</label>
-                        <select multiple name="subCategories" id="select-choice" (change)="getSubCategories($event)">
-                          <option *ngFor="let subCat of subCategories" value="{{subCat.id}}">{{subCat.name}}</option>
-                         
-                        </select>
-                        <div class="feedback">
-                             <i class="text-info">hold CTRL + click (windows)/ CMD + click (Mac) to select multiple sub categories </i>    
-                            </div>
-                            
-                         
-    
-            
-          </div>
-          <div>
-                <input type="submit" value="Save product" />
-              </div>
-        </form>
-      </section>
+        <!-- <ckeditor [(ngModel)]="fullSpecification" #editor2="ngModel" name="editor2" required [config]="ckeConfig2"
+          debounce="500" (paste)="onPaste($event)" (change)="onChange($event)">
+        </ckeditor> -->
+        <ck-editor name="editor1" [(ngModel)]="editorValue" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
+      </div>
+      <div class="onethird">
+
+
+
+        <label for="name">Price</label>
+        <input type="text" name="price" id="price" placeholder="Product price" formControlName="salePrice" />
+
+        <label for="name">Discount price</label>
+        <input type="text" formControlName="saleDiscountPrice" name="discountPrice" id="discountPrice"
+          placeholder="Discount price" />
+
+        <label for="name">Qauntity</label>
+        <input type="number" name="quantity" id="quantity" formControlName="quantity" placeholder="Initial Qauntity" />
+
+        <label for="select-choice">Select Category:</label>
+        <select #category name="categoryId" id="categoryId" formControlName="categoryId"
+          (change)="populateSubCat($event)">
+          <option value="">Please choose</option>
+          <option *ngFor="let cat of categories" value="{{cat.categoryId}}">{{cat.categoryName}}</option>
+
+        </select>
+
+        <label for="select-choice">Select Sub Category:</label>
+        <select multiple name="subCategories" id="select-choice" (change)="getSubCategories($event)">
+          <option *ngFor="let subCat of subCategories" value="{{subCat.id}}">{{subCat.name}}</option>
+
+        </select>
+        <div class="feedback">
+          <i class="text-info">hold CTRL + click (windows)/ CMD + click (Mac) to select multiple sub categories </i>
+        </div>
+
+
+
+
+      </div>
+      <div>
+        <input type="submit" value="Save product" />
+      </div>
+    </form>
+  </section>
 </div>
