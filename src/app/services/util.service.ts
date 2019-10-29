@@ -116,27 +116,27 @@ res = false;
   saveAllProducts(products){
     localStorage.setItem('allProducts',JSON.stringify(products));
   }
-  editProduct(product){
-  let  exi = [];
-     exi = this.fetchAllProduct();
-    exi.forEach((element,index) => {
-      if(product.id===element.id){
-        //remove that product
-        exi.slice(index);
-      }
-    });
-    //then push back to array
-    this.addToProducts(product);
-  }
-  addToProducts(product){
-    const exi = this.fetchAllProduct();
-    exi.push(product);
-    this.saveAllProducts(exi);
-  }
+  // editProduct(product){
+  // let  exi = [];
+  //    exi = this.fetchAllProduct();
+  //   exi.forEach((element,index) => {
+  //     if(product.id===element.id){
+  //       //remove that product
+  //       exi.slice(index);
+  //     }
+  //   });
+  //   //then push back to array
+  //   this.addToProducts(product);
+  // }
+  // addToProducts(product){
+  //   const exi = this.fetchAllProduct();
+  //   exi.push(product);
+  //   this.saveAllProducts(exi);
+  // }
 
-  fetchAllProduct(){
-    return JSON.parse (localStorage.getItem('allProducts'));
-  }
+  // fetchAllProduct(){
+  //  // return JSON.parse (localStorage.getItem('allProducts'));
+  // }
 
   saveProduct(pro){
     localStorage.setItem('product',JSON.stringify(pro));

@@ -55,7 +55,10 @@ export class CrudService {
       console.log(e);
       this.products = e;
       this.products.reverse(); 
-      this.utilService.saveAllProducts(this.products);
+      return this.products;
+    //  this.utilService.saveAllProducts(this.products);
     })
+
+    return null;
   }
 }

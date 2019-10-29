@@ -1,0 +1,18 @@
+
+<h2> Responsive Login Form Without Framework</h2>
+
+<div class="cont">
+
+  <div class="form">
+    <form [formGroup]='form' (ngSubmit)="login()">
+      <h1>Login</h1>
+      <input type="text" formControlName="username" class="user" placeholder="Username" />
+      <input type="password" formControlName="password" class="pass" placeholder="Password" />
+      <button class="login" type="submit">Login</button>
+    </form>
+    <div class="text-danger">{{msg}}</div>
+  </div>
+
+  <h2>login here </h2>
+
+</div>

@@ -21,7 +21,8 @@ export class ProductsInventoryComponent implements OnInit {
 
 
     findAll(){
-  this.products = this.utilService.fetchAllProduct();
+  this.products = this.crudService.fetchAllProductFromApi();
+  
   }
   selected(target){
     console.log(target);

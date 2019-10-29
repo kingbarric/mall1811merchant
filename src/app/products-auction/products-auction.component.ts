@@ -20,7 +20,7 @@ export class ProductsAuctionComponent implements OnInit {
 
 
   findAll() {
-    const pro = this.utilService.fetchAllProduct();
+    const pro = this.crudService.fetchAllProductFromApi();
 
     this.crudService.findAll('auctionproduct/viewallbymerchant').then((e: any) => {
       this.products = e;

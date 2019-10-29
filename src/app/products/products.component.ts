@@ -9,34 +9,41 @@ import { UtilService } from '../services/util.service';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-products =[] ;
-pro ;
-  constructor(private crudService : CrudService, private router: Router, private utilService :UtilService) { }
+  products = [];
+  pro;
+  constructor(private crudService: CrudService, private router: Router, private utilService: UtilService) { }
   p: number = 1;
   ngOnInit() {
     this.findAll();
   }
 
 
-    findAll(){
-  this.products = this.utilService.fetchAllProduct();
+  findAll() {
+    this.crudService.findAll('product/viewallbymerchant')
+      .then((e: any) => {
+        console.log(e);
+        this.products = e;
+        this.products.reverse();
+        return this.products;
+        //  this.utilService.saveAllProducts(this.products);
+      })
   }
 
-  editProduct(pro){
+  editProduct(pro) {
     this.utilService.saveProduct(pro);
     this.router.navigate(['dashboard/add-product'])
-    .then(e=>{
-     
-    })
-    
+      .then(e => {
+
+      })
+
   }
 
-  productSettings(pro){
+  productSettings(pro) {
     //
     this.utilService.saveProduct(pro);
     this.router.navigate(['dashboard/product-settings'])
-    .then(e=>{
-     
-    })
+      .then(e => {
+
+      })
   }
 }
