@@ -20,6 +20,7 @@ import { ProductSettingsComponent } from '../product-settings/product-settings.c
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { CKEditorModule } from 'ngx-ckeditor';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const routes: Routes = [
   {path: '',   redirectTo: 'home', pathMatch: 'full'},
@@ -66,6 +67,7 @@ const routes: Routes = [
     Ng2SearchPipeModule,
     NgxPaginationModule,
     CKEditorModule,
+    ImageCropperModule,
     RouterModule.forChild(routes)
   ]
 })

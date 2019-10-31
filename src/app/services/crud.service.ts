@@ -11,10 +11,12 @@ export class CrudService {
   headers: HttpHeaders;
   products = [];
   imagePath = 'https://service.mall1811.com/';
+  rootURL = 'http://localhost:8084/Ecommerce181JavaWebApi/'
   constructor(private http: HttpClient, private utilService: UtilService) {
     //this.baseUrl = "http://localhost:8084/api/";
     //this.baseUrl = 'https://service.mall1811.com/api/'
-    this.baseUrl = 'http://localhost:8084/Ecommerce181JavaWebApi/api/'
+
+    this.baseUrl = this.rootURL+'/api/';
     this.setHeaderWithToken();
 
   }
