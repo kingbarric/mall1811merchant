@@ -1,0 +1,9 @@
+@media (max-width:1023) {
+  .hide-desktop {
+    display: none !important
+  }
+
+  .closed-sidebar.closed-sidebar-mobile .app-header .app-header__logo .header__pane {
+    display: none !important;
+  }
+}
