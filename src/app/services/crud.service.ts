@@ -10,15 +10,12 @@ export class CrudService {
   baseUrl: string;
   headers: HttpHeaders;
   products = [];
-  imagePath = 'https://service.mall1811.com/';
-  rootURL = 'http://localhost:8084/Ecommerce181JavaWebApi/'
+  imagePath = "https://mall1811webapi.herokuapp.com/api/";
   constructor(private http: HttpClient, private utilService: UtilService) {
     //this.baseUrl = "http://localhost:8084/api/";
     //this.baseUrl = 'https://service.mall1811.com/api/'
-
-    this.baseUrl = this.rootURL+'/api/';
+    this.baseUrl = "https://mall1811webapi.herokuapp.com/api/";
     this.setHeaderWithToken();
-
   }
 
   setHeaderWithToken() {
@@ -41,25 +38,23 @@ export class CrudService {
   }
 
   postUpload(url, data) {
-    const head = new HttpHeaders(
-      {
+    const head = new HttpHeaders({
       //  'Content-Type': 'multipart/form-data',
-        'Authorisation': `Token ${this.utilService.getToken()}`
-      }
-    );
-    return this.http.post(`${this.baseUrl}${url}`, data, { headers: head }).toPromise();
+      Authorisation: `Token ${this.utilService.getToken()}`
+    });
+    return this.http
+      .post(`${this.baseUrl}${url}`, data, { headers: head })
+      .toPromise();
   }
 
-
-  fetchAllProductFromApi(){
-    this.findAll('product/viewallbymerchant')
-    .then((e:any)=>{
+  fetchAllProductFromApi() {
+    this.findAll("product/viewallbymerchant").then((e: any) => {
       console.log(e);
       this.products = e;
-      this.products.reverse(); 
+      this.products.reverse();
       return this.products;
-    //  this.utilService.saveAllProducts(this.products);
-    })
+      //  this.utilService.saveAllProducts(this.products);
+    });
 
     return null;
   }
