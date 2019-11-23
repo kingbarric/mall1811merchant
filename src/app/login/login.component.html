@@ -47,7 +47,7 @@ menue
             <div class="alert alert-success" *ngIf="success" role="alert">
               {{msg}}
             </div>
-            <input type="submit" class="button" value="Sign In">
+            <input type="submit" [disabled]="form.invalid || btnState" class="button" value="Sign In">
           </div>
           <div class="hr"></div>
           <div class="foot-lnk">
@@ -58,29 +58,54 @@ menue
 
       </div>
       <div class="sign-up-htm">
-        <div class="group">
-          <label for="user" class="label">Username</label>
-          <input id="user" type="text" class="input">
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Password</label>
-          <input id="pass" type="password" class="input" data-type="password">
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Repeat Password</label>
-          <input id="pass" type="password" class="input" data-type="password">
-        </div>
-        <div class="group">
-          <label for="pass" class="label">Email Address</label>
-          <input id="pass" type="text" class="input">
-        </div>
-        <div class="group">
-          <input type="submit" class="button" value="Sign Up">
-        </div>
-        <div class="hr"></div>
-        <div class="foot-lnk">
-          <label for="tab-1">Already Member?</label>
-        </div>
+
+        <form [formGroup]='signupForm' (ngSubmit)="signup()">
+          <div class="group">
+            <label for="email" class="label">Email Address</label>
+            <input id="email" formControlName="email" type="email" class="input">
+          </div>
+          <div class="group">
+            <label for="firstname" class="label">First Name</label>
+            <input id="firstname" formControlName="firstname" type="text" class="input">
+          </div>
+          <div class="group">
+            <label for="lastname" class="label">Last Name</label>
+            <input id="lastname" formControlName="lastname" type="text" class="input">
+          </div>
+          <div class="group">
+            <label for="username" class="label">Username</label>
+            <input id="username" formControlName="username" type="text" class="input">
+          </div>
+          <div class="group">
+            <label for="phone" class="label">Phone Number</label>
+            <input id="phone" formControlName="phone" type="tel" class="input">
+          </div>
+          <div class="group">
+            <label for="password" class="label">Password</label>
+            <input id="password" formControlName="password" type="password" class="input" data-type="password">
+          </div>
+          <div class="group">
+            <label for="confirmPass" class="label">Repeat Password</label>
+            <input id="confirmPass" formControlName="confirmPass" type="password" class="input" data-type="password">
+            <p style="color:#931212" *ngIf="signupForm.hasError('notSame')">
+              Passwords do not match
+            </p>
+          </div>
+          <div class="group">
+            <input [disabled]="signupForm.invalid || btnState" type="submit" class="button" value="Sign Up">
+            <div class="alert alert-danger" *ngIf="invalid" role="alert">
+              {{msg}}
+            </div>
+            <div class="alert alert-success" *ngIf="success" role="alert">
+              {{msg}}
+            </div>
+          </div>
+          <div class="hr"></div>
+          <div class="foot-lnk">
+            <label for="tab-1">Already Member?</label>
+          </div>
+
+        </form>
       </div>
     </div>
   </div>
