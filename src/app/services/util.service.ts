@@ -1,37 +1,41 @@
-import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
-import Swal from 'sweetalert2';
-import { Router, NavigationEnd } from '@angular/router';
+import { Injectable } from "@angular/core";
+import { AuthService } from "./auth.service";
+import Swal from "sweetalert2";
+import { Router, NavigationEnd } from "@angular/router";
 
 declare var $: any;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class UtilService {
   Toast: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   getToken() {
-    if (localStorage.getItem('objectid') != null) {
-      console.log('token ',localStorage.getItem('objectid') );
-      return  localStorage.getItem('objectid') 
+    if (localStorage.getItem("token") != null) {
+      return localStorage.getItem("token");
     }
-
-   
   }
 
   getUserObject() {
-    const user = JSON.parse(localStorage.getItem('objectid'));
+    const user = JSON.parse(localStorage.getItem("objectid"));
     return user;
   }
 
-  toast(messageType: any, message: any) {
+  setToken(token) {
+    localStorage.setItem("token", token);
+  }
 
+  setUserObject(user) {
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  toast(messageType: any, message: any) {
     this.Toast = Swal.mixin({
       toast: true,
-      position: 'top-end',
+      position: "top-end",
       showConfirmButton: false,
       timer: 3000
     });
@@ -40,26 +44,25 @@ export class UtilService {
       title: message
     });
   }
-res = false;
-   confirm(message){
-   
-     Swal.fire({
-      title: 'Please confirm',
+  res = false;
+  confirm(message) {
+    Swal.fire({
+      title: "Please confirm",
       text: message,
-      type: 'warning',
+      type: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Ok'
-    }).then((result) => {
-      console.log(result)
-     return result.value;
-    })
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ok"
+    }).then(result => {
+      console.log(result);
+      return result.value;
+    });
     return this.res;
   }
 
   getItemFromCart(id) {
-    const cartItems = JSON.parse(localStorage.getItem('cart'));
+    const cartItems = JSON.parse(localStorage.getItem("cart"));
     let result = null;
 
     if (cartItems) {
@@ -73,48 +76,48 @@ res = false;
   }
 
   emptyCart() {
-    localStorage.removeItem('cart');
+    localStorage.removeItem("cart");
   }
 
   addToCart(item) {
     const check = this.getItemFromCart(item.id);
-    const cartItems = JSON.parse(localStorage.getItem('cart'));
+    const cartItems = JSON.parse(localStorage.getItem("cart"));
 
     if (!check) {
       if (cartItems) {
         cartItems.push(item);
-        localStorage.setItem('cart', JSON.stringify(cartItems));
+        localStorage.setItem("cart", JSON.stringify(cartItems));
         return;
       } else {
         const cart = [];
         cart.push(item);
-        localStorage.setItem('cart', JSON.stringify(cart));
+        localStorage.setItem("cart", JSON.stringify(cart));
       }
     } else {
-      return 'Item already in cart';
+      return "Item already in cart";
     }
   }
 
-  getCartItems () {
+  getCartItems() {
     let cartItems = [];
-    if (JSON.parse(localStorage.getItem('cart')) !== null) {
-      cartItems = JSON.parse(localStorage.getItem('cart'));
+    if (JSON.parse(localStorage.getItem("cart")) !== null) {
+      cartItems = JSON.parse(localStorage.getItem("cart"));
     }
     return cartItems;
   }
 
   scrollToTop() {
-    this.router.events.subscribe((evt) => {
-      const body = $('html, body');
+    this.router.events.subscribe(evt => {
+      const body = $("html, body");
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
-      body.stop().animate({ scrollTop: 0 }, 500, 'swing');
+      body.stop().animate({ scrollTop: 0 }, 500, "swing");
     });
   }
 
-  saveAllProducts(products){
-    localStorage.setItem('allProducts',JSON.stringify(products));
+  saveAllProducts(products) {
+    localStorage.setItem("allProducts", JSON.stringify(products));
   }
   // editProduct(product){
   // let  exi = [];
@@ -138,15 +141,14 @@ res = false;
   //  // return JSON.parse (localStorage.getItem('allProducts'));
   // }
 
-  saveProduct(pro){
-    localStorage.setItem('product',JSON.stringify(pro));
+  saveProduct(pro) {
+    localStorage.setItem("product", JSON.stringify(pro));
   }
-  getProduct(){
-    return JSON.parse(localStorage.getItem('product'));
+  getProduct() {
+    return JSON.parse(localStorage.getItem("product"));
   }
 
-  getDate(d){
-    
+  getDate(d) {
     var date = new Date(d);
     return date.toString();
   }
