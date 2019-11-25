@@ -11,14 +11,15 @@ const routes: Routes = [
     path: "merchant",
     component: DashboardComponent,
     canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
+    data: { allowedusertypes: ["merchant"] },
     loadChildren: () =>
       import("./dashboard/dashboard.module").then(mod => mod.DashboardModule)
   },
   {
     path: "admin",
     canActivate: [AuthGuard],
-    canActivateChild:[AuthGuard],
+    canActivateChild: [AuthGuard],
+    data: { allowedusertypes: ["admin"] },
     loadChildren: () =>
       import("./admin/admin.module").then(mod => mod.AdminModule)
   }

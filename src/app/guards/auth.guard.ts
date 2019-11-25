@@ -26,11 +26,16 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.crudService.isAuthenticated()) {
-      this.router.navigate(["/"]);
-      return false;
+    const allowedusertypes = next.data.allowedusertypes;
+    const isAuthorized = this.crudService.isAuthorized(allowedusertypes);
+    if (this.crudService.isAuthenticated()) {
+      if (isAuthorized) {
+        console.log("allowed access");
+        return true;
+      }
     }
-    return true;
+    this.router.navigate(["/"]);
+    return false;
   }
   canActivateChild(
     next: ActivatedRouteSnapshot,
@@ -40,20 +45,25 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.crudService.isAuthenticated()) {
-      this.router.navigate(["/"]);
-      return false;
+    const allowedusertypes = next.data.allowedusertypes;
+    const isAuthorized = this.crudService.isAuthorized(allowedusertypes);
+    if (this.crudService.isAuthenticated()) {
+      if (isAuthorized) {
+        console.log("allowed access");
+        return true;
+      }
     }
-    return true;
+    this.router.navigate(["/"]);
+    return false;
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (!this.crudService.isAuthenticated()) {
-      this.router.navigate(["/"]);
-      return false;
+    if (this.crudService.isAuthenticated()) {
+      return true;
     }
-    return true;
+    this.router.navigate(["/"]);
+    return false;
   }
 }
