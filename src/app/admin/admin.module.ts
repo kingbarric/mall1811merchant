@@ -18,71 +18,89 @@ import { AdminUserbidCashRequestComponent } from "./admin-userbid-cash-request/a
 import { AdminMerchantsComponent } from "./admin-merchants/admin-merchants.component";
 import { AdminTicketsComponent } from "./admin-tickets/admin-tickets.component";
 import { AdminLogisticsComponent } from "./admin-logistics/admin-logistics.component";
+import { AuthGuard } from "../guards/auth.guard";
 
 const routes: Routes = [
   {
     path: "",
     component: AdminComponent,
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     children: [
       {
         path: "",
         redirectTo: "dashboard",
+        canActivate: [AuthGuard],
         pathMatch: "full"
       },
       {
         path: "dashboard",
+        canActivate: [AuthGuard],
         component: AdminDashboardComponent
       },
       {
         path: "categories",
+        canActivate: [AuthGuard],
         component: AdminCategoryComponent
       },
       {
         path: "sub-categories",
+        canActivate: [AuthGuard],
         component: AdminSubCategoryComponent
       },
       {
         path: "products",
+        canActivate: [AuthGuard],
         component: AdminProductComponent
       },
       {
         path: "products-on-sale",
+        canActivate: [AuthGuard],
         component: AdminProductOnSaleComponent
       },
       {
         path: "purchased-products",
+        canActivate: [AuthGuard],
         component: AdminPurchasedProductComponent
       },
       {
         path: "auction-products",
+        canActivate: [AuthGuard],
         component: AdminAuctionProductComponent
       },
       {
         path: "approved-live-auction",
+        canActivate: [AuthGuard],
         component: AdminApprovedLiveAuctionComponent
       },
       {
         path: "tickets",
+        canActivate: [AuthGuard],
         component: AdminTicketsComponent
       },
       {
         path: "user-bids",
+        canActivate: [AuthGuard],
         component: AdminUserBidsComponent
       },
       {
         path: "user-won-bids",
+        canActivate: [AuthGuard],
         component: AdminUserWonBidsComponent
       },
       {
         path: "userbids-cash-request",
+        canActivate: [AuthGuard],
         component: AdminUserbidCashRequestComponent
       },
       {
         path: "merchants",
+        canActivate: [AuthGuard],
         component: AdminMerchantsComponent
       },
       {
         path: "logistics",
+        canActivate: [AuthGuard],
         component: AdminLogisticsComponent
       }
     ]

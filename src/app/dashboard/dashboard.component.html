@@ -1,34 +1,47 @@
 <header role="banner">
-    <h1>Mall 1811 Merchant Dashboard</h1>
-    <ul class="utilities">
-      <li class="users"><a href="#">My Account</a></li>
-      <li class="logout warn"><button (click)="loggout()"   class="btn btn-link btn-warning">Log Out</button></li>
-    </ul>
-  </header>
-  
-  <nav role="navigation">
-    <ul class="main">
-        <li routerLinkActive="active"><a   routerLink="home"  routerLinkActive="active"> <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a></li>
-      <li routerLinkActive="active"><a   routerLink="product"  routerLinkActive="active"><i class="fa fa-bars" aria-hidden="true"></i> Products</a></li>
-      <li routerLinkActive="active"><a   routerLink="add-product"  routerLinkActive="active"> <i class="fa fa-plus"  ></i>  New product</a></li>
-      <li routerLinkActive="active"><a   routerLink="product-inventory"  routerLinkActive="active"><i class="fa fa-database"  ></i> Products Inventory</a></li>
-      <li routerLinkActive="active"><a   routerLink="product-onsale"  routerLinkActive="active"><i class="fa fa-shopping-bag"></i> Products on sale</a></li>
-      <li routerLinkActive="active"><a   routerLink="product-auction"  routerLinkActive="active"> <i class="fa fa-clone" aria-hidden="true"></i> Products Auction</a></li>
+  <h1>Mall 1811 Merchant Dashboard</h1>
+  <ul class="utilities">
+    <li class="users"><a href="#">My Account</a></li>
+    <li class="logout warn"><button (click)="loggout()" class="btn btn-link btn-warning">Log Out</button></li>
+  </ul>
+</header>
 
-      <li routerLinkActive="active"><a   routerLink="product-bids"  routerLinkActive="active"><i class="fa fa-tasks" aria-hidden="true"></i>My products bids</a></li>
-      <li routerLinkActive="active"><a   routerLink="product-won-bids"  routerLinkActive="active"><i class="fa fa-check" aria-hidden="true"></i>Product won bids</a></li>
-      <li routerLinkActive="active"><a   routerLink="product-order"  routerLinkActive="active"><i class="fa fa-exchange" aria-hidden="true"></i>Products order</a></li>
-      <li routerLinkActive="active"><a   routerLink="completed-order"  routerLinkActive="active"><i class="fa fa-external-link" aria-hidden="true"></i>Completed order</a></li>
-      <li routerLinkActive="active"><a   routerLink="tickets"  routerLinkActive="active"><i class="fa fa-ticket" aria-hidden="true"></i>Tickets</a></li>
-      <li routerLinkActive="active"><a   routerLink="profile"  routerLinkActive="active"><i class="fa fa-user-circle" aria-hidden="true"></i>Profile</a></li>
-      <li routerLinkActive="active"><a   routerLink="/auctions/closed"  routerLinkActive="active"><i class="fa fa-sign-out" aria-hidden="true"></i>Loggout</a></li>
-    </ul>
-  </nav>
-  
-  <main role="main">
-        
-                <router-outlet></router-outlet>
- 
-  
-  </main>
-  <footer role="contentinfo">Easy Admin Style Barric Rebirth System</footer>
+<nav role="navigation">
+  <ul class="main">
+    <li routerLinkActive="active"><a routerLink="home" routerLinkActive="active"> <i class="fa fa-tachometer"
+          aria-hidden="true"></i> Dashboard</a></li>
+    <li routerLinkActive="active"><a routerLink="product" routerLinkActive="active"><i class="fa fa-bars"
+          aria-hidden="true"></i> Products</a></li>
+    <li routerLinkActive="active"><a routerLink="add-product" routerLinkActive="active"> <i class="fa fa-plus"></i> New
+        product</a></li>
+    <li routerLinkActive="active"><a routerLink="product-inventory" routerLinkActive="active"><i
+          class="fa fa-database"></i> Products Inventory</a></li>
+    <li routerLinkActive="active"><a routerLink="product-onsale" routerLinkActive="active"><i
+          class="fa fa-shopping-bag"></i> Products on sale</a></li>
+    <li routerLinkActive="active"><a routerLink="product-auction" routerLinkActive="active"> <i class="fa fa-clone"
+          aria-hidden="true"></i> Products Auction</a></li>
+
+    <li routerLinkActive="active"><a routerLink="product-bids" routerLinkActive="active"><i class="fa fa-tasks"
+          aria-hidden="true"></i>My products bids</a></li>
+    <li routerLinkActive="active"><a routerLink="product-won-bids" routerLinkActive="active"><i class="fa fa-check"
+          aria-hidden="true"></i>Product won bids</a></li>
+    <li routerLinkActive="active"><a routerLink="product-order" routerLinkActive="active"><i class="fa fa-exchange"
+          aria-hidden="true"></i>Products order</a></li>
+    <li routerLinkActive="active"><a routerLink="completed-order" routerLinkActive="active"><i
+          class="fa fa-external-link" aria-hidden="true"></i>Completed order</a></li>
+    <li routerLinkActive="active"><a routerLink="tickets" routerLinkActive="active"><i class="fa fa-ticket"
+          aria-hidden="true"></i>Tickets</a></li>
+    <li routerLinkActive="active"><a routerLink="profile" routerLinkActive="active"><i class="fa fa-user-circle"
+          aria-hidden="true"></i>Profile</a></li>
+    <li routerLinkActive="active"><a routerLink="/auctions/closed" routerLinkActive="active"><i class="fa fa-sign-out"
+          aria-hidden="true"></i>Loggout</a></li>
+  </ul>
+</nav>
+
+<main role="main">
+
+  <router-outlet></router-outlet>
+
+
+</main>
+<footer role="contentinfo">Easy Admin Style Barric Rebirth System</footer>
