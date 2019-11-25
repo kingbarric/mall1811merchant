@@ -8,6 +8,10 @@ import { CrudService } from "src/app/services/crud.service";
 })
 export class AdminSubCategoryComponent implements OnInit {
   subCategory: any[] = [];
+  description: string = "";
+  name: string = "";
+  btnBusy: boolean = false;
+
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -23,6 +27,28 @@ export class AdminSubCategoryComponent implements OnInit {
       })
       .catch((err: any) => {
         console.log(err);
+      });
+  }
+
+  addSubCategory() {
+    this.btnBusy = true;
+    const data = {
+      description: this.description,
+      // imageIcon: "string",
+      name: this.name
+    };
+    console.log(data);
+    this.crudService
+      .postAll("pub/productcategories/savesubcategory", data)
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch((err: any) => {
+        console.log(err);
+      })
+      .finally(() => {
+        this.btnBusy = false;
+        this.getSubCategory();
       });
   }
 }

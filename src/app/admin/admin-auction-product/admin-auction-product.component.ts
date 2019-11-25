@@ -7,6 +7,7 @@ import { CrudService } from "src/app/services/crud.service";
   styleUrls: ["./admin-auction-product.component.scss"]
 })
 export class AdminAuctionProductComponent implements OnInit {
+  products: any[] = [];
   constructor(private curdService: CrudService) {}
 
   ngOnInit() {
@@ -15,7 +16,9 @@ export class AdminAuctionProductComponent implements OnInit {
   getAuctionProduct() {
     this.curdService
       .findAll("pub/auctionproduct/viewall")
-      .then((res: any) => console.log(res))
+      .then((res: any) => {
+        this.products = res;
+      })
       .catch((err: any) => {
         console.log(err);
       });

@@ -1,4 +1,4 @@
-.scrollbar-sidebar{
+.scrollbar-sidebar {
   position: relative;
   height: 100%;
   min-height: 90vh;
@@ -36,4 +36,12 @@
 
 .scrollbar-sidebar::-webkit-scrollbar-thumb {
   -webkit-box-shadow: none;
+}
+
+
+nav[role=navigation] {
+  position: fixed;
+  width: initial !important;
+  top: 75px;
+  bottom: 0px;
 }

@@ -4,8 +4,8 @@
   <div class="row">
     <div class="col-md-6">
       <div>
-        <a class="btn btn-success" routerLink="/dashboard/add-product">
-          Add new product
+        <a style="color:white" class="btn btn-success" data-toggle="modal" data-target="#subCategoryModal">
+          Add Sub Category
         </a>
       </div>
     </div>
@@ -61,24 +61,37 @@
 </section>
 
 
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="subCategoryModal" tabindex="-1" role="dialog" aria-labelledby="subCategoryModalLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Product details</h5>
+        <h5 class="modal-title" id="subCategoryModalLabel">Create Sub Category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        content of product
+        <form #categoryForm="ngForm">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="inputEmail4">Name</label>
+              <input type="text" [(ngModel)]="name" name="name" class="form-control" id="inputEmail4"
+                placeholder="Category Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Description</label>
+            <textarea name="description" [(ngModel)]="description" class="form-control" id="inputAddress2"
+              placeholder="Category description" id="" cols="30" rows="5"></textarea>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" (click)="addSubCategory()" [disabled]="categoryForm.form.invalid || btnBusy"
+          class="btn btn-success">Add Sub Category</button>
       </div>
     </div>
   </div>
