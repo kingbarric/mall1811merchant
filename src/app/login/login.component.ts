@@ -79,12 +79,12 @@ export class LoginComponent implements OnInit {
         if (res.code == 0) {
           this.utilService.setToken(res.token);
           this.utilService.setUserObject(res);
-          this.router.navigate(['/dashboard'])
+          this.router.navigate(["/dashboard"]);
         }
         this.btnState = false;
       })
       .catch((err: any) => {
-        console.log(err.error);
+        console.log(err);
         if (err.error.code == -1) {
           this.msg = "Invalid Username or Password";
           this.success = false;
