@@ -20,7 +20,7 @@ export class UtilService {
   }
 
   getUserObject() {
-    const user = JSON.parse(localStorage.getItem("objectid"));
+    const user = JSON.parse(localStorage.getItem("user"));
     return user;
   }
 

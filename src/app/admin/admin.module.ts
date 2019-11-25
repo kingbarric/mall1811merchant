@@ -25,82 +25,97 @@ const routes: Routes = [
     path: "",
     component: AdminComponent,
     canActivate: [AuthGuard],
-    canLoad: [AuthGuard],
+    data: { allowedusertypes: ["admin"] },
     children: [
       {
         path: "",
         redirectTo: "dashboard",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         pathMatch: "full"
       },
       {
         path: "dashboard",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminDashboardComponent
       },
       {
         path: "categories",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminCategoryComponent
       },
       {
         path: "sub-categories",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminSubCategoryComponent
       },
       {
         path: "products",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminProductComponent
       },
       {
         path: "products-on-sale",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminProductOnSaleComponent
       },
       {
         path: "purchased-products",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminPurchasedProductComponent
       },
       {
         path: "auction-products",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminAuctionProductComponent
       },
       {
         path: "approved-live-auction",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminApprovedLiveAuctionComponent
       },
       {
         path: "tickets",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminTicketsComponent
       },
       {
         path: "user-bids",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminUserBidsComponent
       },
       {
         path: "user-won-bids",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminUserWonBidsComponent
       },
       {
         path: "userbids-cash-request",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminUserbidCashRequestComponent
       },
       {
         path: "merchants",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminMerchantsComponent
       },
       {
         path: "logistics",
         canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
         component: AdminLogisticsComponent
       }
     ]

@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private utilService: UtilService,
     private router: Router
-  ) {}
+  ) {
+    this.loggedIn();
+  }
 
   ngOnInit() {
     this.initForm();
@@ -79,7 +81,7 @@ export class LoginComponent implements OnInit {
         if (res.code == 0) {
           this.utilService.setToken(res.token);
           this.utilService.setUserObject(res);
-          this.router.navigate(["/dashboard"]);
+          this.routeTo(res);
         }
         this.btnState = false;
       })
@@ -127,5 +129,23 @@ export class LoginComponent implements OnInit {
         this.btnState = false;
       });
     console.log(data);
+  }
+
+  loggedIn() {
+    if (
+      this.utilService.getToken() != null &&
+      this.utilService.getUserObject() != null
+    ) {
+      this.routeTo(this.utilService.getUserObject());
+    }
+  }
+
+  routeTo(res) {
+    console.log(res);
+    if (res.userType == "merchant") {
+      this.router.navigate(["/merchant"]);
+    } else {
+      this.router.navigate(["/admin"]);
+    }
   }
 }
