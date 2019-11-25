@@ -19,6 +19,7 @@ export class CrudService {
       Accept: "application/json",
       Authorization: "Bearer " + this.utilService.getToken()
     });
+    this.isAuthenticated();
   }
 
   // setHeaderWithToken() {
@@ -60,5 +61,14 @@ export class CrudService {
     });
 
     return null;
+  }
+
+  isAuthenticated(): boolean {
+
+    console.log(localStorage.getItem("token") != null)
+    if (localStorage.getItem("token") != null) {
+      return true;
+    }
+    return false;
   }
 }
