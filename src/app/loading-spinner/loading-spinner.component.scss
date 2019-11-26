@@ -1,0 +1,32 @@
+div.spinner {
+    height: 21px;
+    width: 21px;
+    margin: 20px auto;
+    border-radius: 50%;
+    border: dashed 1px #D0CE03;
+    animation-name: loader-spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  
+    &.large {
+      width: 43px;
+      height: 43px;
+      border-width: 3px;
+      left: 50%;
+      top: 40%;
+      position: absolute;
+      z-index: 9999;
+    }
+  }
+  
+  @-webkit-keyframes loader-spin {
+    from {
+      transform: rotate(0deg);
+    }
+  
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  

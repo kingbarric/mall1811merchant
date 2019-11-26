@@ -6,9 +6,16 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { AuthInterceptor } from "./services/auth.interceptor";
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    LoginComponent,
+    LoadingSpinnerComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -16,7 +23,13 @@ import { LoginComponent } from "./login/login.component";
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

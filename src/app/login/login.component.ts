@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    // this.utilService.showLoading();
     this.btnState = true;
     const data = {
       email: this.form.controls.username.value,
@@ -87,13 +88,13 @@ export class LoginComponent implements OnInit {
       })
       .catch((err: any) => {
         console.log(err);
-        if (err.error.code == -1) {
-          this.msg = "Invalid Username or Password";
-          this.success = false;
-          this.invalid = true;
-        } else {
-          this.msg = "An error occured please try again";
-        }
+        // if (err.error.code == -1) {
+        //   this.msg = "Invalid Username or Password";
+        //   this.success = false;
+        //   this.invalid = true;
+        // } else {
+        //   this.msg = "An error occured please try again";
+        // }
         this.btnState = false;
       });
   }
