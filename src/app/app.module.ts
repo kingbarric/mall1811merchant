@@ -2,15 +2,20 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { LoginComponent } from "./login/login.component";
-import { ProductSettingsComponent } from "./product-settings/product-settings.component";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { AuthInterceptor } from "./services/auth.interceptor";
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    LoginComponent,
+    LoadingSpinnerComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -18,7 +23,13 @@ import { ProductSettingsComponent } from "./product-settings/product-settings.co
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

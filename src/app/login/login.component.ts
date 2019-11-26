@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private utilService: UtilService,
     private router: Router
-  ) {}
+  ) {
+    this.loggedIn();
+  }
 
   ngOnInit() {
     this.initForm();
@@ -66,6 +68,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    // this.utilService.showLoading();
     this.btnState = true;
     const data = {
       email: this.form.controls.username.value,
@@ -79,19 +82,19 @@ export class LoginComponent implements OnInit {
         if (res.code == 0) {
           this.utilService.setToken(res.token);
           this.utilService.setUserObject(res);
-          this.router.navigate(['/dashboard'])
+          this.routeTo(res);
         }
         this.btnState = false;
       })
       .catch((err: any) => {
-        console.log(err.error);
-        if (err.error.code == -1) {
-          this.msg = "Invalid Username or Password";
-          this.success = false;
-          this.invalid = true;
-        } else {
-          this.msg = "An error occured please try again";
-        }
+        console.log(err);
+        // if (err.error.code == -1) {
+        //   this.msg = "Invalid Username or Password";
+        //   this.success = false;
+        //   this.invalid = true;
+        // } else {
+        //   this.msg = "An error occured please try again";
+        // }
         this.btnState = false;
       });
   }
@@ -127,5 +130,23 @@ export class LoginComponent implements OnInit {
         this.btnState = false;
       });
     console.log(data);
+  }
+
+  loggedIn() {
+    if (
+      this.utilService.getToken() != null &&
+      this.utilService.getUserObject() != null
+    ) {
+      this.routeTo(this.utilService.getUserObject());
+    }
+  }
+
+  routeTo(res) {
+    console.log(res);
+    if (res.userType == "merchant") {
+      this.router.navigate(["/merchant"]);
+    } else {
+      this.router.navigate(["/admin"]);
+    }
   }
 }

@@ -1,0 +1,110 @@
+<section class="panel  important">
+  <h2>List of Categories</h2>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+        <a style="color:white" class="btn btn-success" data-toggle="modal" data-target="#categoryModal">
+          Add Category
+        </a>
+      </div>
+    </div>
+    <div class="col-md-6">
+
+
+
+      <div class="wrap">
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search"
+            [(ngModel)]="filter">
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <table class="rwd-table table-responsive">
+    <tbody>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Admin Markup</th>
+        <th>Markup Percentage</th>
+        <th>Description</th>
+        <th>Date added</th>
+        <th>Settings</th>
+        <th>Edit</th>
+      </tr>
+      <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
+      <tr *ngFor="let category of categories; let i = index ">
+        <td>{{category?.id}}</td>
+        <td>{{category?.name }}</td>
+        <td>{{category?.isAdminMarkup}}</td>
+        <td>{{category?.priceMarkupPercentage}}</td>
+        <td>{{category?.description}}</td>
+        <td>{{category?.dateAdded | date:'medium'}}</td>
+        <td>
+          <a class="btn btn-warning" (click)="categoryductSettings(category)">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+          </a>
+        </td>
+        <td>
+          <a class="btn btn-success" (click)="editProduct(pro)">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </a>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+  <div class="paginate-tabs">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="categoryModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="categoryModalLabel">Create Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #categoryForm="ngForm">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="inputEmail4">Name</label>
+              <input type="text" [(ngModel)]="name" name="name" class="form-control" id="inputEmail4"
+                placeholder="Category Name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress">Price Markup Percentage</label>
+            <input type="number" name="priceMarkupPercentage" [(ngModel)]="priceMarkupPercentage" class="form-control"
+              id="inputAddress" placeholder="Markup Percentage">
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Description</label>
+            <textarea name="description" [(ngModel)]="description" class="form-control" id="inputAddress2"
+              placeholder="Category description" id="" cols="30" rows="5"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="addCategory()" [disabled]="categoryForm.form.invalid || btnBusy"
+          class="btn btn-success">Add
+          Category</button>
+      </div>
+    </div>
+  </div>
+</div>

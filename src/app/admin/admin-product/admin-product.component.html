@@ -1,0 +1,87 @@
+ <section class="panel  important">
+
+   <div class="row px-3 py-2">
+     <div class="col-md-6">
+       <h2>List of products</h2>
+     </div>
+     <div class="col-md-6">
+       <div class="wrap mt-1">
+         <div class="search">
+           <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search"
+             [(ngModel)]="filter">
+           <button type="submit" class="searchButton">
+             <i class="fa fa-search"></i>
+           </button>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <table class="rwd-table table-responsive">
+     <tbody>
+       <tr>
+         <th>ID</th>
+         <th>Name</th>
+         <th>Price</th>
+         <th>Discount Price</th>
+         <th>Quantity</th>
+         <th>Category</th>
+         <th>Is up forsale</th>
+         <th>Is up for auction</th>
+         <th>Date added</th>
+         <th>Settings</th>
+         <th>Edit</th>
+       </tr>
+       <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
+       <tr *ngFor="let pro of products; let i = index ">
+         <td>{{pro?.id}}</td>
+         <td>{{pro?.name }}</td>
+         <td>{{pro?.price}}</td>
+         <td>{{pro?.saleDiscountPrice}}</td>
+         <td>{{pro?.quantity}}</td>
+         <td>{{pro?.categoryId.name}}</td>
+         <td>{{pro?.isUpforsale}}</td>
+         <td>{{pro?.isUpforauction}}</td>
+         <td>{{pro?.dateAdded | date:'medium'}}</td>
+         <td>
+           <a class="btn btn-warning" (click)="productSettings(pro)">
+             <i class="fa fa-cog" aria-hidden="true"></i>
+           </a>
+         </td>
+         <td>
+           <a class="btn btn-success" (click)="editProduct(pro)">
+             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+           </a>
+         </td>
+
+       </tr>
+     </tbody>
+   </table>
+   <div class="paginate-tabs">
+     <pagination-controls (pageChange)="p = $event"></pagination-controls>
+   </div>
+ </section>
+
+
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+   aria-hidden="true">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Product details</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         content of product
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary">Save changes</button>
+       </div>
+     </div>
+   </div>
+ </div>

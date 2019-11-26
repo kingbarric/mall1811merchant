@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { AuthService } from "./auth.service";
 import Swal from "sweetalert2";
 import { Router, NavigationEnd } from "@angular/router";
+import { BehaviorSubject } from "rxjs";
 
 declare var $: any;
 
@@ -10,6 +11,10 @@ declare var $: any;
 })
 export class UtilService {
   Toast: any;
+  toggleLoading: any;
+  toggleLoadingSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   constructor(private router: Router) {}
 
@@ -20,7 +25,7 @@ export class UtilService {
   }
 
   getUserObject() {
-    const user = JSON.parse(localStorage.getItem("objectid"));
+    const user = JSON.parse(localStorage.getItem("user"));
     return user;
   }
 
@@ -151,5 +156,19 @@ export class UtilService {
   getDate(d) {
     var date = new Date(d);
     return date.toString();
+  }
+
+  hideLoading() {
+    this.toggleLoading = true;
+    return this.toggleLoadingSubject.next(false);
+  }
+
+  showLoading() {
+    this.toggleLoading = false;
+    return this.toggleLoadingSubject.next(true);
+  }
+
+  loadingState() {
+    return this.toggleLoadingSubject;
   }
 }
