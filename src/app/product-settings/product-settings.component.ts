@@ -35,7 +35,7 @@ export class ProductSettingsComponent implements OnInit {
 
   constructor(private auth: AuthService, private route: Router,
     private crudService: CrudService, private utilService: UtilService) {
-    this.imagePath = this.crudService.rootURL;
+    this.imagePath = this.crudService.imagePath;
   }
 
   ngOnInit() {
@@ -60,7 +60,7 @@ export class ProductSettingsComponent implements OnInit {
   }
 
   getImage(p) {
-    return this.crudService.rootURL + p;
+  return this.crudService.imagePath + p;
   }
 
 
