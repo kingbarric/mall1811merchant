@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AuthService } from "../services/auth.service";
 
 @Component({
   selector: "app-admin",
@@ -7,7 +8,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class AdminComponent implements OnInit {
   navbarState: string = "open";
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {}
 
@@ -17,5 +18,9 @@ export class AdminComponent implements OnInit {
     } else {
       this.navbarState = "open";
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

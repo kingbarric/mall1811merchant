@@ -1,9 +1,11 @@
 <!-- new -->
 <header role="banner">
-  <h1>Mall 181 Admin Dashboard</h1>
-  <ul class="utilities">
-    <li class="users"><a href="#">My Account</a></li>
-    <li class="logout warn"><button (click)="loggout()" class="btn btn-link btn-warning">Log Out</button></li>
+  <h3 class="mt-3 ml-3">Mall 181 Admin Dashboard</h3>
+  <ul class="utilities mt-3 ml-3">
+    <a routerLink="/">
+      <li class="logout mr-3 mb-2"><i class="fa fa-user mr-2"></i> My Account</li>
+    </a>
+    <li (click)="logout()" class="logout mr-2"><i class="fa fa-sign-out mr-2"></i> Logout</li>
   </ul>
 </header>
 
