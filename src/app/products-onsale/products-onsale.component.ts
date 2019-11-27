@@ -11,6 +11,7 @@ import { UtilService } from '../services/util.service';
 export class ProductsOnsaleComponent implements OnInit {
   products = [];
   pro;
+  filter:any
   constructor(private crudService: CrudService, private router: Router, private utilService: UtilService) { }
   p: number = 1;
   ngOnInit() {
