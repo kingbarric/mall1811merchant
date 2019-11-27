@@ -11,7 +11,8 @@ export class AdminSubCategoryComponent implements OnInit {
   description: string = "";
   name: string = "";
   btnBusy: boolean = false;
-
+  filter: any;
+  p: any;
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -51,4 +52,7 @@ export class AdminSubCategoryComponent implements OnInit {
         this.getSubCategory();
       });
   }
+  productSettings(pro) {}
+  editProduct(pro) {}
+  categoryductSettings(sub) {}
 }

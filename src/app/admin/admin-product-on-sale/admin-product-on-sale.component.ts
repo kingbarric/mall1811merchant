@@ -8,6 +8,8 @@ import { CrudService } from "src/app/services/crud.service";
 })
 export class AdminProductOnSaleComponent implements OnInit {
   products: any[] = [];
+  p: any;
+  filter: any;
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -25,4 +27,7 @@ export class AdminProductOnSaleComponent implements OnInit {
         console.log(err);
       });
   }
+
+  productSettings(pro) {}
+  editProduct(pro) {}
 }

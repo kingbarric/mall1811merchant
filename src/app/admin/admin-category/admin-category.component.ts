@@ -12,6 +12,8 @@ export class AdminCategoryComponent implements OnInit {
   name: string = "";
   priceMarkupPercentage: Number = 0;
   btnBusy: boolean = false;
+  p: any;
+  filter: any;
 
   constructor(private crudService: CrudService) {}
 
@@ -50,7 +52,10 @@ export class AdminCategoryComponent implements OnInit {
       })
       .finally(() => {
         this.btnBusy = false;
-        this.getCategory()
+        this.getCategory();
       });
   }
+ 
+  categoryductSettings(category){}
+  editProduct(category){}
 }

@@ -8,6 +8,9 @@ import { CrudService } from "src/app/services/crud.service";
 })
 export class AdminUserBidsComponent implements OnInit {
   usersbid: any[] = [];
+  p: any;
+  filter: any;
+  products: any;
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -18,11 +21,14 @@ export class AdminUserBidsComponent implements OnInit {
     this.crudService
       .findAll("bidding/viewall")
       .then((res: any) => {
-        this.usersbid = res
+        this.usersbid = res;
         console.log(res);
       })
       .catch((res: any) => {
         console.log(res);
       });
   }
+  editProduct(pro) {}
+
+  productSettings(pro){}
 }

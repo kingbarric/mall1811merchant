@@ -16,7 +16,7 @@ export class ProductAddComponent implements OnInit, OnDestroy {
 
   ckeConfig: any;
   ckeConfig2: any;
-
+  editorValue:any
   form: FormGroup;
   msg = '';
   categories = [];
