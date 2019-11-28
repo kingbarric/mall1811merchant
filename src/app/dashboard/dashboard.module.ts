@@ -22,6 +22,7 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { CKEditorModule } from "ngx-ckeditor";
 import { AuthGuard } from '../guards/auth.guard';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { AddProductComponent } from '../add-product/add-product.component';
 
 const routes: Routes = [
   {
@@ -140,7 +141,8 @@ const routes: Routes = [
     ProductEditComponent,
     ProductWonbidsComponent,
     ProductsInventoryComponent,
-    ProductSettingsComponent
+    ProductSettingsComponent,
+    AddProductComponent
   ],
   imports: [
     CommonModule,
