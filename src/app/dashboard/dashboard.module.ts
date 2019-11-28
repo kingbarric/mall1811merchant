@@ -20,8 +20,7 @@ import { ProductSettingsComponent } from "../product-settings/product-settings.c
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { NgxPaginationModule } from "ngx-pagination";
 import { CKEditorModule } from "ngx-ckeditor";
-import { AuthGuard } from '../guards/auth.guard';
-import { ImageCropperModule } from 'ngx-image-cropper';
+import { AuthGuard } from "../guards/auth.guard";
 import { AddProductComponent } from '../add-product/add-product.component';
 
 const routes: Routes = [
