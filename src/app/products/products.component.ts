@@ -34,12 +34,12 @@ export class ProductsComponent implements OnInit {
 
   editProduct(pro) {
     this.utilService.saveProduct(pro);
-    this.router.navigate(["dashboard/add-product"]).then(e => {});
+    this.router.navigate(["merchant/add-product"]).then(e => {});
   }
 
   productSettings(pro) {
     //
     this.utilService.saveProduct(pro);
-    this.router.navigate(["dashboard/product-settings"]).then(e => {});
+    this.router.navigate(["merchant/product-settings"]).then(e => {});
   }
 }

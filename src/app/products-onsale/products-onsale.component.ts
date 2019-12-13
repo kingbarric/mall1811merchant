@@ -21,7 +21,7 @@ export class ProductsOnsaleComponent implements OnInit {
 
   findAll() {
    // const pro = this.utilService.fetchAllProduct();
-    this.crudService.findAll('productonsale/viewallfrommerchant').then((e: any) => {
+    this.crudService.findAll('pub/productonsale/viewallfrommerchant').then((e: any) => {
       console.log(e);
       this.products = e;
       console.log(this.products);
