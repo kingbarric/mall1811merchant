@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CrudService } from '../services/crud.service';
 import { UtilService } from '../services/util.service';
 import Swal from 'sweetalert2';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-product-settings',
@@ -23,12 +24,19 @@ export class ProductSettingsComponent implements OnInit {
   existingProduct = null;
   productId = 0;
   titleText = 'Add new product';
-  imageFile;
+  imageFile: any = '';
   public imagePath;
   imgURL: any;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
   public message: string;
+  allImages = [];
+  imageRoot;
+
   constructor(private auth: AuthService, private route: Router,
-    private crudService: CrudService, private utilService: UtilService) { }
+    private crudService: CrudService, private utilService: UtilService) {
+    this.imagePath = this.crudService.imagePath;
+  }
 
   ngOnInit() {
     this.existingProduct = this.isProductExist();
@@ -37,7 +45,59 @@ export class ProductSettingsComponent implements OnInit {
     }
     this.initForm(this.existingProduct);
     this.initFormInventory();
+
+    this.findAllImage();
   }
+
+
+  findAllImage() {
+    this.crudService.findAll(`product/viewallimage/${this.existingProduct.id}`)
+      .then((e: any) => {
+        //  console.log(e)
+        //  this.utilService.saveAllProducts(this.products);
+        this.allImages = e;
+      })
+  }
+
+  getImage(p) {
+  return this.crudService.imagePath + p;
+  }
+
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+    console.log(event.target);
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    this.imageFile = event.file;
+    //console.log(event)
+    // console.log(this.croppedImage);
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+    this.utilService.toast('error', 'Error occured while loading image, make sure image is valid');
+  }
+
+  urltoFile(image) {
+    const byteString = atob(image.split(',')[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i += 1) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    const newBlob = new Blob([ab], {
+      type: 'image/png',
+    });
+    return newBlob;
+  }
+
 
   initForm(pro) {
     console.log('pross ', pro);
@@ -89,19 +149,20 @@ export class ProductSettingsComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Ok'
     }).then((result) => {
-      if(result.value){
-    this.crudService.postAll('product/updatesalesauction', data)
-      .then((e: any) => {
-        console.log(e);
-        if (e.code == 0) {
-          this.utilService.toast('success', e.message);
-          //  this.route.navigate(['dashboard/product']);
-        } else {
-          this.utilService.toast('warning', e.message);
+      if (result.value) {
+        this.crudService.postAll('product/updatesalesauction', data)
+          .then((e: any) => {
+            console.log(e);
+            if (e.code == 0) {
+              this.utilService.toast('success', e.message);
+              //  this.route.navigate(['dashboard/product']);
+            } else {
+              this.utilService.toast('warning', e.message);
 
-        }
-      });
-    }  })
+            }
+          });
+      }
+    })
   }
 
   saveInventory() {
@@ -110,7 +171,7 @@ export class ProductSettingsComponent implements OnInit {
       quantity: this.formInventory.controls.quantity.value,
       note: this.formInventory.controls.note.value
     }
- 
+
 
     Swal.fire({
       title: 'Please confirm',
@@ -121,75 +182,107 @@ export class ProductSettingsComponent implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Ok'
     }).then((result) => {
-      if(result.value){
-         this.crudService.postAll('productinventory/save', data)
-        .then((e: any) => {
-          console.log(e);
-          if (e.code == 0) {
-            this.utilService.toast('success', e.message);
-            //  this.route.navigate(['dashboard/product']);
-            this.existingProduct.quantity = this.existingProduct.quantity + data.quantity;
-          } else {
-            this.utilService.toast('warning', e.message);
+      if (result.value) {
+        this.crudService.postAll('productinventory/save', data)
+          .then((e: any) => {
+            console.log(e);
+            if (e.code == 0) {
+              this.utilService.toast('success', e.message);
+              //  this.route.navigate(['dashboard/product']);
+              this.existingProduct.quantity = this.existingProduct.quantity + data.quantity;
+            } else {
+              this.utilService.toast('warning', e.message);
 
-          }
-        });
+            }
+          });
 
-      }  })
-
-
-    // if(this.utilService.confirm('Add new qauntity?')){
-
-    // }
-
+      }
+    })
 
   }
 
-  uploadChange(files){
-    this.imageFile =  files[0];
-    if (files.length === 0)
-    return;
 
-  var mimeType = files[0].type;
-  if (mimeType.match(/image\/*/) == null) {
-    this.message = "Only images are supported.";
-    return;
-  }
 
-  var reader = new FileReader();
-  this.imagePath = files;
-  reader.readAsDataURL(files[0]); 
-  reader.onload = (_event) => { 
-    this.imgURL = reader.result; 
-  }
-  }
- 
   addImage() {
-   
-    
-
     const url = 'product/uploadimage';
 
-    // console.log(data);
+    //   console.log(this.croppedImage);
+    const file = this.urltoFile(this.croppedImage);
     const fd = new FormData();
-    fd.append('file', this.imageFile );
+    fd.append('file', file);
     fd.append('id', this.existingProduct.id);
-   // console.log(file)
+    console.log(fd);
 
     this.crudService.postUpload(url, fd)
       .then((res: any) => {
         console.log(res)
         if (res.code === 0) {
           this.utilService.toast('success', res.message);
+          this.croppedImage = null;
+          this.findAllImage();
         }
       })
-      .catch(e => this.utilService.toast('error', 'There was an error while uploading image'));
+      .catch(e => this.utilService.toast('error', 'There was an error while uploading image ' + e.message));
   }
 
 
- 
-  preview(files) {
-  
+  isDefault(url) {
+    console.log('EXISTING: ',this.existingProduct.imageCover,' IMAGEURL: ',url)
+    return this.existingProduct.imageCover === url;
+  }
+
+  deleteImage(id) {
+
+
+    Swal.fire({
+      title: 'Please confirm',
+      text: 'Delete this image ?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ok'
+    }).then((result) => {
+      if (result.value) {
+        this.crudService.findAll(`product/deleteimage/${id}`)
+          .then((e: any) => {
+            if (e.code == 0) {
+              this.utilService.toast('success', e.message);
+              this.findAllImage();
+            } else {
+              this.utilService.toast('warning', e.message)
+            }
+          })
+
+      }
+    })
+  }
+
+  setAsDefault(imageId) {
+
+    Swal.fire({
+      title: 'Please confirm',
+      text: 'Set as default Cover Image ?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ok'
+    }).then((result) => {
+      if (result.value) {
+        this.crudService.findAll(`product/makeimagedefault/${imageId}/${this.existingProduct.id}`)
+          .then((e: any) => {
+            if (e.code == 0) {
+              this.utilService.toast('success', e.message);
+              this.findAllImage();
+            } else {
+              this.utilService.toast('warning', e.message)
+            }
+          })
+
+      }
+    })
+
   }
 
 }

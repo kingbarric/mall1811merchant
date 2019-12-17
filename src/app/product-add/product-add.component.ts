@@ -129,7 +129,7 @@ export class ProductAddComponent implements OnInit, OnDestroy {
   }
 
   getCategories() {
-    this.crudService.findAll('productcategories/getwithsubcategories')
+    this.crudService.findAll('pub/productcategories/getwithsubcategories')
       .then((e: any) => {
         if (e) {
           console.log(e)

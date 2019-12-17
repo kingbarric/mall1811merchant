@@ -22,6 +22,7 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { CKEditorModule } from "ngx-ckeditor";
 import { AuthGuard } from "../guards/auth.guard";
 import { AddProductComponent } from '../add-product/add-product.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 const routes: Routes = [
   {
@@ -150,6 +151,7 @@ const routes: Routes = [
     Ng2SearchPipeModule,
     NgxPaginationModule,
     CKEditorModule,
+    ImageCropperModule,
     RouterModule.forChild(routes)
   ]
 })
