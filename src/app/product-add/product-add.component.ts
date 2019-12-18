@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { CrudService } from '../services/crud.service';
 import { UtilService } from '../services/util.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-add',
@@ -16,7 +17,7 @@ export class ProductAddComponent implements OnInit, OnDestroy {
 
   ckeConfig: any;
   ckeConfig2: any;
-  editorValue:any
+  editorValue: any
   form: FormGroup;
   msg = '';
   categories = [];
@@ -104,12 +105,14 @@ export class ProductAddComponent implements OnInit, OnDestroy {
       .then((e: any) => {
         console.log(e);
         if (e.code == 0) {
-          this.utilService.toast('success', e.message);
+          //  this.utilService.toast('success', e.message);
+          Swal.fire('Status',  e.message, 'success');
           const p = this.crudService.fetchAllProductFromApi();
           this.utilService.saveAllProducts(p);
-          this.route.navigate(['dashboard/product']);
+          this.route.navigate(['merchant/product']);
         } else {
-          this.utilService.toast('warning', e.message);
+         // this.utilService.toast('warning', e.message);
+         Swal.fire('Oops',  e.message, 'warning');
         }
 
       })

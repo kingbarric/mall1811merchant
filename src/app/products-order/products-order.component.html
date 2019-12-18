@@ -1,1 +1,63 @@
-<p>products-order works!</p>
+<section class="panel  important">
+   
+    
+      <div class="row">
+       
+        <div class="col-md-6"> 
+          
+        
+        
+          <div class="wrap">
+              <div class="search">
+                 <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search" [(ngModel)]="filter">
+                 <button type="submit" class="searchButton">
+                   <i class="fa fa-search"></i>
+                </button>
+              </div>
+           </div>
+        
+        </div>
+      </div>
+         
+     
+    <table class="rwd-table">
+        <tbody>
+      <tr>
+        <th>ID</th>
+        <th>Product name</th>
+        <th>Product Category</th>
+        <th>Quantity</th>
+        <th>Total Price</th>
+        <th>Delivery Status</th>
+        <th>Price per unit</th> 
+        <th>Date Ordered</th>
+         
+      </tr>
+      <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
+      <tr *ngFor="let pro of data | paginate: { itemsPerPage: 10, currentPage: p  } | filter:filter; let i = index ">
+        <td>{{pro.id}}</td>
+        <td>{{pro.productId.name }}</td>
+        <td>{{pro.productId.categoryId.name}}</td>
+        <td>{{pro.quantity}}</td>
+        <td>{{pro.totalPrice}}</td>
+        <td>{{pro.deliveryStatus}}</td>
+        <td>{{pro.productId.salePrice}}</td> 
+        <td>{{pro.dateOrdered}}</td>
+        <!-- <td>
+            <a   class="btn btn-warning" (click)="productSettings(pro)" >
+                <i class="fa fa-cog" aria-hidden="true"></i>
+            </a>
+        </td>
+        <td>
+            <a   class="btn btn-success" (click)="editProduct(pro)" >
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+        </td> -->
+  
+      </tr>
+     </tbody>
+    </table>
+    <div class="paginate-tabs">
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </section>
