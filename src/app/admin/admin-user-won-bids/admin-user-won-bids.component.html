@@ -1,1 +1,76 @@
-<p>admin-user-won-bids works!</p>
+<section class="panel  important">
+
+    <div class="row px-3 py-2">
+      <div class="col-md-6">
+        <h2>Cash Requests</h2>
+      </div>
+      <div class="col-md-6">
+        <div class="wrap mt-1">
+          <div class="search">
+            <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search"
+              [(ngModel)]="filter">
+            <button type="submit" class="searchButton">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <table class="rwd-table table-responsive">
+      <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Redeemed</th>
+          <th>Redemption Type</th>
+          <th>Bid Type</th>
+          <th>Time Won</th>
+          <th>Reason</th>
+          <th>More</th>
+        </tr>
+        <tr *ngFor="let bid of bidsWon; let i = index ">
+          <td>{{bid?.userId.profileId.firstName | titlecase}} {{bid?.userId.profileId.lastName | titlecase}}</td>
+          <td>{{bid?.userId.profileId.phone}}</td>
+          <td><span *ngIf="bid?.isRedeemed">Yes</span> <span *ngIf="!bid?.isRedeemed">No</span></td>
+          <td>{{bid.redemptionType | titlecase}}</td>
+          <td>{{bid.bidType}}</td>
+          <td>{{bid?.dateWon | date:'medium'}}</td>
+          <td>{{bid.reason}}</td>
+          <td>
+            <a class="btn btn-warning" (click)="productSettings(pro)">
+              <i class="fa fa-binoculars"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="paginate-tabs">
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </section>
+  
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Product details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          content of product
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

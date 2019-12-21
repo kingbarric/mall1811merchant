@@ -267,9 +267,9 @@ main{
     li {
       position: relative;
       padding-left: 1.2em;
-      margin:.5em  0;
+      // margin:.5em  0;
       &:before {
-        content: '';
+        // content: '';
         position: absolute;
         width: 0;
         height: 0;

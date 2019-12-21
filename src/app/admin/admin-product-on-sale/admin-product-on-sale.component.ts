@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CrudService } from "src/app/services/crud.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-admin-product-on-sale",
@@ -10,7 +11,7 @@ export class AdminProductOnSaleComponent implements OnInit {
   products: any[] = [];
   p: any;
   filter: any;
-  constructor(private crudService: CrudService) {}
+  constructor(private crudService: CrudService, private router: Router) {}
 
   ngOnInit() {
     this.getProduct();
@@ -28,6 +29,15 @@ export class AdminProductOnSaleComponent implements OnInit {
       });
   }
 
-  productSettings(pro) {}
+  productSettings(pro) {
+    const product = {
+      ...pro.productId,
+      pro
+    };
+    console.log(product);
+    this.router.navigate(["admin/view-product"]).then(() => {
+      localStorage.setItem("product", JSON.stringify(product));
+    });
+  }
   editProduct(pro) {}
 }
