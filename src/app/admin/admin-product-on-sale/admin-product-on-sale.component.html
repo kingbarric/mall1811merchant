@@ -30,8 +30,7 @@
         <th>Is up forsale</th>
         <th>Is up for auction</th>
         <th>Date added</th>
-        <th>Settings</th>
-        <th>Edit</th>
+        <th>View</th>
       </tr>
       <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
       <tr *ngFor="let pro of products; let i = index ">
@@ -42,20 +41,15 @@
         <td>{{pro?.approved}}</td>
         <td>{{pro?.productId.quantity}}</td>
         <td>{{pro?.productId.categoryId.name}}</td>
-        <td>{{pro?.productId.isUpforsale}}</td>
-        <td>{{pro?.productId.isUpforauction}}</td>
+        <td><span *ngIf="pro?.productId.isUpforsale">Yes</span> <span *ngIf="!pro?.productId.isUpforsale">No</span></td>
+        <td><span *ngIf="pro?.productId.isUpforauction">Yes</span> <span
+            *ngIf="!pro?.productId.isUpforauction">No</span></td>
         <td>{{pro?.productId.dateAdded | date:'medium'}}</td>
         <td>
           <a class="btn btn-warning" (click)="productSettings(pro)">
-            <i class="fa fa-cog" aria-hidden="true"></i>
+            <i class="fa fa-binoculars"></i>
           </a>
         </td>
-        <td>
-          <a class="btn btn-success" (click)="editProduct(pro)">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-          </a>
-        </td>
-
       </tr>
     </tbody>
   </table>

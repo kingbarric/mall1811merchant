@@ -1,0 +1,57 @@
+<div>
+  <section>
+    <div class="row">
+      <div class="col-md-12">
+        <section class="panel important">
+          <h5 class="heads">Product Details</h5>
+          <div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Product Name: </strong>{{product?.name}}</li>
+              <li class="list-group-item"><strong>Price:</strong> {{product.price}}</li>
+              <li class="list-group-item"><strong>Markup Percentage:</strong> {{product.adminMarkupPercentage}}</li>
+              <li class="list-group-item"><strong>Average Rating:</strong> {{product.averageRatings}}</li>
+              <li class="list-group-item"><strong>Date Added:</strong> {{product.dateAdded| date:'medium'}}</li>
+              <li class="list-group-item"><strong>Quantity:</strong> {{product.quantity}}</li>
+              <li class="list-group-item"><strong>Discount Price:</strong> {{product.discountPrice}}</li>
+              <li *ngIf="product.isUpforsale" class="list-group-item"><strong>For Sale:</strong> <span>yes</span></li>
+              <li *ngIf="!product.isUpforsale" class="list-group-item"><strong>For Sale:</strong> <span>No</span></li>
+              <li *ngIf="product.isUpforauction" class="list-group-item"><strong>For Auction:</strong> Yes</li>
+              <li *ngIf="!product.isUpforauction" class="list-group-item"><strong>For Auction:</strong> No</li>
+              <li class="list-group-item"><strong>Rating Counts:</strong> {{product.ratingsCount}}</li>
+              <li class="list-group-item"><strong>Sale Discount Price:</strong> {{product.saleDiscountPrice}}</li>
+              <li class="list-group-item"><strong>Sale price:</strong> {{product.salePrice}}</li>
+              <li class="list-group-item"><strong>Total Rating:</strong> {{product.totalRatings}}</li>
+              <li class="list-group-item"><strong>Total Review:</strong> {{product.totalReviews}}</li>
+              <li class="list-group-item"><strong>Description:</strong> {{product.description}}</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </section>
+
+
+  <section class="panel important">
+    <h5 class="heads">View uploaded image</h5>
+
+    <div class="container">
+
+      <h1 class="heading">Your images here</h1>
+
+      <div class="gallery">
+
+        <div *ngFor="let img of allImages" class="gallery-item">
+          <img class="gallery-image" [src]="getImage(img.imagePath)"
+            alt="person writing in a notebook beside by an iPad, laptop, printed photos, spectacles, and a cup of coffee on a saucer">
+          <h5 class="m-3 mr-3"><button class="btn btn-warning" (click)="setAsDefault(img.id)">Set as Default</button>
+            <button class="btn btn-danger" (click)="deleteImage(img.id)">delete</button>
+            <i class="text-success" *ngIf="isDefault(img.imagePath)"> DEFAULT COVER</i>
+          </h5>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>

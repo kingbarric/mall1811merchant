@@ -1,0 +1,30 @@
+<div>
+  <section class="panel important">
+    <h2 class="text-align-center">Configure <i>{{product.name}} </i> </h2>
+
+  </section>
+
+
+  <section class="panel important">
+    <h5 class="heads">Edit Admin Product Markup</h5>
+    <div class="add-image-section">
+      <div class="row form-group">
+
+        <div class="col-md-9">
+          <div class="ml-2">
+            <input class="form-control" [(ngModel)]="product.adminMarkupPercentage" placeholder="Markup Percentage"
+              type="number">
+          </div>
+        </div>
+        <div class="col-auto">
+          <button type="submit" (click)="updateMarkup()" class="btn btn-primary form-control">
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-product-details [product]="product"></app-product-details>
+
+</div>

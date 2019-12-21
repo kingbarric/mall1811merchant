@@ -1,5 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { ReactiveFormsModule, FormControl } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { AdminComponent } from "./admin.component";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -19,6 +20,9 @@ import { AdminMerchantsComponent } from "./admin-merchants/admin-merchants.compo
 import { AdminTicketsComponent } from "./admin-tickets/admin-tickets.component";
 import { AdminLogisticsComponent } from "./admin-logistics/admin-logistics.component";
 import { AuthGuard } from "../guards/auth.guard";
+import { AdminProductSettingsComponent } from "./admin-product-settings/admin-product-settings.component";
+import { ProductDetailsComponent } from "./product-details/product-details.component";
+import { AdminViewProductsComponent } from "./admin-view-products/admin-view-products.component";
 
 const routes: Routes = [
   {
@@ -117,6 +121,18 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { allowedusertypes: ["admin"] },
         component: AdminLogisticsComponent
+      },
+      {
+        path: "products/setting",
+        canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
+        component: AdminProductSettingsComponent
+      },
+      {
+        path: "view-product",
+        canActivate: [AuthGuard],
+        data: { allowedusertypes: ["admin"] },
+        component: AdminViewProductsComponent
       }
     ]
   }
@@ -138,9 +154,18 @@ const routes: Routes = [
     AdminUserbidCashRequestComponent,
     AdminMerchantsComponent,
     AdminTicketsComponent,
-    AdminLogisticsComponent
+    AdminLogisticsComponent,
+    AdminProductSettingsComponent,
+    ProductDetailsComponent,
+    AdminViewProductsComponent
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), FormsModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule
+    // FormControl
+  ],
   providers: [],
   bootstrap: [AdminComponent],
   schemas: [NO_ERRORS_SCHEMA],

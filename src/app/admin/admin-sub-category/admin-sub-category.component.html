@@ -33,21 +33,16 @@
         <th>ID</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Settings</th>
+        <!-- <th>Settings</th> -->
         <th>Edit</th>
       </tr>
-      <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
       <tr *ngFor="let subCat of subCategory; let i = index ">
         <td>{{subCat?.id}}</td>
         <td>{{subCat?.name }}</td>
         <td>{{subCat?.description}}</td>
         <td>
-          <a class="btn btn-warning" (click)="categoryductSettings(subCat)">
-            <i class="fa fa-cog" aria-hidden="true"></i>
-          </a>
-        </td>
-        <td>
-          <a class="btn btn-success" (click)="editProduct(subCat)">
+          <a class="btn btn-success" data-toggle="modal" data-target="#editSubCategoryModal"
+            (click)="subCategoryObj=subCat">
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
           </a>
         </td>
@@ -80,6 +75,13 @@
               <input type="text" [(ngModel)]="name" name="name" class="form-control" id="inputEmail4"
                 placeholder="Category Name">
             </div>
+            <div class="form-group col-12">
+              <label for="cat14">Category</label>
+              <select placeholder="Category Name" [(ngModel)]="categoryId" name="category" class="form-control"
+                id="cat14">
+                <option *ngFor="let category of category" value="{{category.id}}">{{category.name}}</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
             <label for="inputAddress2">Description</label>
@@ -92,6 +94,50 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" (click)="addSubCategory()" [disabled]="categoryForm.form.invalid || btnBusy"
           class="btn btn-success">Add Sub Category</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- edit modal -->
+<div class="modal fade" id="editSubCategoryModal" tabindex="-1" role="dialog"
+  aria-labelledby="editSubCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editSubCategoryModalLabel">Edit Sub Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #categoryForm="ngForm">
+          <div class="form-row">
+            <div class="form-group col-12">
+              <label for="inputEmail4">Name</label>
+              <input type="text" [(ngModel)]="subCategoryObj.name" name="name" class="form-control" id="inputEmail4"
+                placeholder="Sub Category Name">
+            </div>
+            <div class="form-group col-12">
+              <label for="cat14">Category</label>
+              <select placeholder="Category Name" [(ngModel)]="categoryId" name="category"
+                class="form-control" id="cat14">
+                <option *ngFor="let category of category" value="{{category.id}}">{{category.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputAddress2">Description</label>
+            <textarea name="description" [(ngModel)]="subCategoryObj.description" class="form-control"
+              id="inputAddress2" placeholder="Category description" id="" cols="30" rows="5"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="editSubCategory()" [disabled]="categoryForm.form.invalid || btnBusy"
+          class="btn btn-success">Save Changes</button>
       </div>
     </div>
   </div>

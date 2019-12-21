@@ -10,11 +10,11 @@ export class AdminCategoryComponent implements OnInit {
   categories: any[] = [];
   description: string = "";
   name: string = "";
-  priceMarkupPercentage: Number = 0;
+  priceMarkupPercentage: number = 0;
   btnBusy: boolean = false;
   p: any;
   filter: any;
-
+  category: {} = {};
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -55,7 +55,24 @@ export class AdminCategoryComponent implements OnInit {
         this.getCategory();
       });
   }
- 
-  categoryductSettings(category){}
-  editProduct(category){}
+
+  editCategory() {
+    this.btnBusy = true;
+    console.log(this.category)
+    this.crudService
+      .postAll("pub/productcategories/save", this.category)
+      .then((res: any) => {
+        console.log(res);
+      })
+      .catch((err: any) => {
+        console.log(err);
+      })
+      .finally(() => {
+        this.btnBusy = false;
+        this.getCategory();
+      });
+  }
+
+  categoryductSettings(category) {}
+  editProduct(category) {}
 }
