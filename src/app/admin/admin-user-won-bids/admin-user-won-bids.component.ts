@@ -7,6 +7,10 @@ import { CrudService } from "src/app/services/crud.service";
   styleUrls: ["./admin-user-won-bids.component.scss"]
 })
 export class AdminUserWonBidsComponent implements OnInit {
+  bidsWon: any[] = [];
+  p: any;
+  filter: any;
+  products: any;
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -17,7 +21,8 @@ export class AdminUserWonBidsComponent implements OnInit {
     this.crudService
       .findAll("bidding/findbidwinnings")
       .then((res: any) => {
-        console.log(res);
+        this.bidsWon = res
+        console.log(this.bidsWon);
       })
       .catch((err: any) => {
         console.log(err);

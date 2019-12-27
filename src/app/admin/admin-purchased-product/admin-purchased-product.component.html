@@ -1,1 +1,120 @@
-<p>admin-purchased-product works!</p>
+<section class="panel  important">
+
+  <div class="row px-3 py-2">
+    <div class="col-md-6">
+      <h2>Purchased Products</h2>
+    </div>
+    <div class="col-md-6">
+      <div class="wrap mt-1">
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search"
+            [(ngModel)]="filter">
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <table class="rwd-table table-responsive">
+    <tbody>
+      <tr>
+        <th>Purchase ID</th>
+        <th>Username</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Delivery Status</th>
+        <!-- <th>Product Name</th> -->
+
+        <th>Date Ordered</th>
+        <th>channel</th>
+        <th>View Product</th>
+        <th>Settings</th>
+      </tr>
+      <tr *ngFor="let pro of purchasedProducts; let i = index ">
+        <td>{{pro?.id}}</td>
+        <td>{{pro?.userId.profileId.username }}</td>
+        <!-- <td>{{pro?.userId.profileId.phone}}</td> -->
+        <td>&#8358;{{pro?.totalAmount}}</td>
+        <td>{{pro?.totalQuantity}}</td>
+        <td>{{pro?.status}}</td>
+        <!-- <td>{{'Error occured'}}</td> -->
+        <!-- <td>{{'Error occured'}}</td> -->
+        <td>{{pro?.dateOrdered | date:'medium'}}</td>
+        <td>{{pro?.channel | titlecase}}</td>
+        <td>
+          <a class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
+            (click)="productDetails= pro.productOrderDetailsList; checkPro()">
+            <i class="fa fa-binoculars"></i>
+          </a>
+        </td>
+        <td>
+          <a class="btn btn-warning">
+            <i class="fa fa-cog"></i>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paginate-tabs">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+  </div>
+</section>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Username</th>
+                <th>Bid Amount</th>
+                <th>Won</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Auction Amount</th>
+                <th>Bid type</th>
+                <th>Bid Time</th>
+                <th>More</th>
+              </tr>
+              <tr *ngFor="let bid of usersbid; let i = index ">
+                <td>{{bid?.userId.profileId.username | titlecase}}</td>
+                <td>{{bid?.bidAmount }}</td>
+                <td><span *ngIf="bid?.isWon">Yes</span> <span *ngIf="!bid?.isWon">No</span></td>
+                <td>{{bid.auctionProductId.productId.name}}</td>
+                <td>{{bid.auctionProductId.productId.quantity}}</td>
+                <td>&#8358;{{bid.auctionProductId.productId.price}}</td>
+                <td>{{bid.auctionProductId.auctionAmount}}</td>
+                <td>{{bid.auctionProductId.bidType  | uppercase}}</td>
+                <td>{{bid?.timeBidded | date:'medium'}}</td>
+                <td>
+                  <a class="btn btn-warning" (click)="productSettings(pro)">
+                    <i class="fa fa-binoculars"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

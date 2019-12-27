@@ -15,7 +15,7 @@ export class AdminUserBidsComponent implements OnInit {
 
   ngOnInit() {
     this.userBids();
-  }
+  } 
 
   userBids() {
     this.crudService

@@ -7,6 +7,10 @@ import { CrudService } from "src/app/services/crud.service";
   styleUrls: ["./admin-purchased-product.component.scss"]
 })
 export class AdminPurchasedProductComponent implements OnInit {
+  purchasedProducts: any[] = [];
+  p: any;
+  filter: any;
+  productDetails: any[] = [];
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -15,12 +19,19 @@ export class AdminPurchasedProductComponent implements OnInit {
 
   purchasedProduct() {
     this.crudService
-      .findAll("")
+      .findAll("productorder/viewall")
       .then((res: any) => {
-        console.log(res);
+        this.purchasedProducts = res;
+        console.log(this.purchasedProducts);
       })
       .catch((err: any) => {
         console.log(err);
       });
+  }
+
+  checkPro() {
+    setTimeout(() => {
+      console.log(this.productDetails);
+    }, 2000);
   }
 }

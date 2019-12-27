@@ -7,6 +7,7 @@ import { CrudService } from "src/app/services/crud.service";
   styleUrls: ["./admin-userbid-cash-request.component.scss"]
 })
 export class AdminUserbidCashRequestComponent implements OnInit {
+  cashRequest: any[] = [];
   constructor(private crudService: CrudService) {}
 
   ngOnInit() {
@@ -17,6 +18,7 @@ export class AdminUserbidCashRequestComponent implements OnInit {
     this.crudService
       .findAll("woncashrequest/getallforadmin")
       .then((res: any) => {
+        this.cashRequest = res;
         console.log(res);
       })
       .catch((err: any) => {

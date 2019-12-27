@@ -1,0 +1,33 @@
+<div>
+  <section class="panel important">
+    <h2 class="text-align-center">Configure <i>{{product.name}} </i> </h2>
+
+  </section>
+
+
+  <section class="panel important">
+    <h5 class="heads">Edit Admin Product Markup</h5>
+    <div class="add-image-section">
+      <div class="row form-group">
+
+        <div class="col-md-9">
+          <div class="ml-2">
+            <!-- <div class="panel"> -->
+            <div class="custom-control custom-switch">
+              <input type="checkbox" [(ngModel)]="approve" class="form-control custom-control-input" id="isUpforSale">
+              <label class="custom-control-label" for="isUpforSale">Approve Product</label>
+              <button type="submit" (click)="updateSale()" class="ml-3 btn btn-primary">
+                Save
+              </button>
+              <!-- </div> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <app-product-details [product]="product"></app-product-details>
+
+</div>
