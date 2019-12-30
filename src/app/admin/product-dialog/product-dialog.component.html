@@ -1,0 +1,76 @@
+<!-- Large modal -->
+<!-- <button type="button" class="btn btn-primary" (click)="setProduct(products)" data-toggle="modal" data-target=".product-modal">Product Details</button> -->
+
+<div class="modal fade product-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+     
+        <span class="p-1 ml-auto mr-auto"> <strong> DETAILS OF {{product?.name}} </strong> </span>  
+        <div class="row">
+          <div class="col-md-6"> 
+
+                <section class="panel important">
+                   
+                    <div>
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Product Name: </strong>{{product?.name}}</li>
+                        <li class="list-group-item"><strong>Price:</strong> {{product?.price}}</li>
+                        <li class="list-group-item"><strong>Markup Percentage:</strong> {{product?.adminMarkupPercentage}}</li>
+                        <li class="list-group-item"><strong>Average Rating:</strong> {{product?.averageRatings}}</li>
+                        <li class="list-group-item"><strong>Date Added:</strong> {{product?.dateAdded| date:'medium'}}</li>
+                        <li class="list-group-item"><strong>Quantity:</strong> {{product?.quantity}}</li>
+                        <li class="list-group-item"><strong>Discount Price:</strong> {{product?.discountPrice}}</li>
+                     
+                      </ul>
+                    </div>
+                  </section>
+            </div>
+            <div class="col-md-6"> 
+                <section class="panel important">
+                    <!-- <h5 class="heads">Product Details</h5> -->
+                    <div>
+                      <ul class="list-group list-group-flush">
+                      
+                        <li  class="list-group-item"><strong>For Sale:</strong> {{showText(product?.isUpforsale)}}</li>
+                        <li  class="list-group-item"><strong>For Auction:</strong> {{showText(product?.isUpforauction)}}</li>
+
+                        <li class="list-group-item"><strong>Rating Counts:</strong> {{product?.ratingsCount}}</li>
+                        <li class="list-group-item"><strong>Sale Discount Price:</strong> {{product?.saleDiscountPrice}}</li>
+                        <li class="list-group-item"><strong>Sale price:</strong> {{product?.salePrice}}</li>
+                        <li class="list-group-item"><strong>Total Rating:</strong> {{product?.totalRatings}}</li>
+                        <li class="list-group-item"><strong>Total Review:</strong> {{product?.totalReviews}}</li>
+                        <li class="list-group-item"><strong>Description:</strong> {{product?.description}}</li>
+                      </ul>
+                    </div>
+                  </section>
+
+                  <a href="#" class="btn btn-warning">Full product details</a>
+                  </div>
+        </div>
+        <span class="p-1 ml-auto mr-auto"> <strong> DETAILS OF MERCHANT </strong> </span>  
+        <div class="row">
+            <div class="col-md-6"> 
+                 
+                  <section class="panel important">
+                     
+                      <div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item"><strong>CODE: </strong>{{product?.merchantId.id}}</li>
+                          <li class="list-group-item"><strong>First Name:</strong> {{product.merchantId.profileId.firstName}}</li>
+                          <li class="list-group-item"><strong>Last Name:</strong> {{product.merchantId.profileId.lastName}}</li>
+                          <li class="list-group-item"><strong>Email:</strong> {{product.merchantId.profileId.email}}</li>
+                          <li class="list-group-item"><strong>Address:</strong> {{product.merchantId.profileId.fullAddress}}</li>
+                          <li class="list-group-item"><strong>City:</strong> {{product.merchantId.profileId.city}}</li>
+                          <li class="list-group-item"><strong>Phone:</strong> {{product.merchantId.profileId.phone}}</li>
+                          <li class="list-group-item"><strong>Confirmed:</strong> {{product.merchantId.profileId.isConfirmed}}</li> 
+                        </ul>
+                      </div>
+                      <a href="#" class="btn btn-warning">Full Merchant details</a>
+                    </section>
+                  
+              </div>
+              
+          </div>
+    </div>
+  </div>
+</div>

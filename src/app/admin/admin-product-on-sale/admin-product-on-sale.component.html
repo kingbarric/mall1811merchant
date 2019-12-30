@@ -1,8 +1,9 @@
-<section class="panel  important">
+
+<div class="container">
 
   <div class="row px-3 py-2">
     <div class="col-md-6">
-      <h2>List of products</h2>
+      <h2>List of products On Sales</h2>
     </div>
     <div class="col-md-6">
       <div class="wrap mt-1">
@@ -17,67 +18,54 @@
     </div>
   </div>
 
-  <table class="rwd-table table-responsive">
+  <table class="table table-bordered table-hover">
     <tbody>
       <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
-        <th>Discount Price</th>
-        <th>Approved</th>
-        <th>Quantity</th>
+        <!-- <th>Discount Price</th> -->
+        <!-- <th>Approved</th> -->
+         <th>Active</th> 
         <th>Category</th>
-        <th>Is up forsale</th>
-        <th>Is up for auction</th>
+          <th>Merchant Code</th>
+        
         <th>Date added</th>
-        <th>View</th>
+        <th>Approve</th>
       </tr>
       <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
       <tr *ngFor="let pro of products; let i = index ">
         <td>{{pro?.id}}</td>
-        <td>{{pro?.productId.name }}</td>
-        <td>{{pro?.productId.price}}</td>
-        <td>{{pro?.productId.saleDiscountPrice}}</td>
-        <td>{{pro?.approved}}</td>
-        <td>{{pro?.productId.quantity}}</td>
+        <td >{{pro?.productId.name }} <a (click)="setProduct(pro.productId)" data-toggle="modal"
+           data-target=".product-modal" class="btn btn-secondary btn-link"  ><i class="fa fa-search"></i></a> </td>
+         <td>{{pro?.productId.price}}</td>  
+        <!-- <td>{{pro?.approved}}</td> -->
+        <td>{{pro?.isActive}}</td>
         <td>{{pro?.productId.categoryId.name}}</td>
-        <td><span *ngIf="pro?.productId.isUpforsale">Yes</span> <span *ngIf="!pro?.productId.isUpforsale">No</span></td>
-        <td><span *ngIf="pro?.productId.isUpforauction">Yes</span> <span
-            *ngIf="!pro?.productId.isUpforauction">No</span></td>
+        <td>{{pro?.productId.merchantId.id}}</td>
+        
         <td>{{pro?.productId.dateAdded | date:'medium'}}</td>
         <td>
-          <a class="btn btn-warning" (click)="productSettings(pro)">
-            <i class="fa fa-binoculars"></i>
-          </a>
+          {{showText(pro.approved)}}
+            <button   [ngClass]="pro.approved?'btn btn-warning':'btn btn-success'" (click)="toggleState(pro.approved,pro.id,i)">{{showApprove(pro.approved)}}</button>
         </td>
       </tr>
     </tbody>
   </table>
   <div class="paginate-tabs">
-    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-  </div>
-</section>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Product details</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        content of product
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li  [ngClass]="first?'page-item disabled':'page-item'"  ><a class="page-link" href="#" [ngDisabled]="first" (click)="goPrevious($event)">Previous</a></li>
+            <li class="page-item" *ngFor="let p of totalPages; let i = index"><a class="page-link" (click)="gotoPage(i,$event)" href="#">{{i+1}}</a></li>
+           
+            <li  [ngClass]="last?'page-item disabled':'page-item'"><a class="page-link" href="#" (click)="goNext($event)" [disable]="!last">Next</a></li>
+          </ul>
+          Page {{pageNumber+1}} of {{totalPages.length}} , total products {{totalElements}}
+        </nav>
   </div>
 </div>
+
+
+<app-product-dialog [product]="product"></app-product-dialog>
+<!-- Modal -->
+ 

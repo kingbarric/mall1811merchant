@@ -23,6 +23,8 @@ import { AuthGuard } from "../guards/auth.guard";
 import { AdminProductSettingsComponent } from "./admin-product-settings/admin-product-settings.component";
 import { ProductDetailsComponent } from "./product-details/product-details.component";
 import { AdminViewProductsComponent } from "./admin-view-products/admin-view-products.component";
+import { ProductDialogComponent } from './product-dialog/product-dialog.component';
+import { MerchantDialogComponent } from './merchant-dialog/merchant-dialog.component';
 
 const routes: Routes = [
   {
@@ -157,7 +159,9 @@ const routes: Routes = [
     AdminLogisticsComponent,
     AdminProductSettingsComponent,
     ProductDetailsComponent,
-    AdminViewProductsComponent
+    AdminViewProductsComponent,
+    ProductDialogComponent,
+    MerchantDialogComponent
   ],
   imports: [
     CommonModule,

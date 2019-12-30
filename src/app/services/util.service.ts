@@ -49,6 +49,14 @@ export class UtilService {
       title: message
     });
   }
+
+  dynamicToast(code,message){
+    if(code===0){
+      this.toast('success',message)
+    }else{
+      this.toast('warning',message);
+    }
+  }
   res = false;
   confirm(message) {
     Swal.fire({
