@@ -152,7 +152,8 @@ export class AdminProductOnSaleComponent implements OnInit {
       cancelButtonColor: "#d33",
       confirmButtonText: this.showApprove(status)
     }).then(result => {
-       if(result){
+      console.log(result)
+       if(result.value){
         this.updateApprove(status,id,index);
         
        }

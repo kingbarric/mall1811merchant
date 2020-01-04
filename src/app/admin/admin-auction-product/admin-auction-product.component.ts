@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { CrudService } from "src/app/services/crud.service";
 import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: "app-admin-auction-product",
@@ -12,7 +13,7 @@ export class AdminAuctionProductComponent implements OnInit {
   products;
   filter: any;
   p: any;
-  product :any;
+  product;
   totalPages: Array<number>;
   totalElements = 29;
   size = 10;
@@ -22,7 +23,9 @@ export class AdminAuctionProductComponent implements OnInit {
   numberOfElements = 10;
   contentEmpty = false;
   adminMarkup=0;
-  proId=0; constructor(private crudService: CrudService, private router: Router, private util: UtilService) { }
+  proId=0;
+  form: FormGroup;
+   constructor(private crudService: CrudService, private router: Router, private util: UtilService) { }
 
   ngOnInit() {
      
@@ -31,7 +34,7 @@ export class AdminAuctionProductComponent implements OnInit {
 
   findAllProduct() {
     this.crudService
-      .findAll(`productonsale/findall/${this.pageNumber}/${this.size}`)
+      .findAll(`auctionproduct/findall/${this.pageNumber}/${this.size}`)
       .then((res: any) => {
         this.products = res.content;
         this.totalPages = new Array(res.totalPages);
@@ -108,4 +111,6 @@ export class AdminAuctionProductComponent implements OnInit {
         console.log(err);
       });
   }
+
+   
 }
