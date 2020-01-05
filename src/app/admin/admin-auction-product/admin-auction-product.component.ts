@@ -4,6 +4,19 @@ import { Router } from '@angular/router';
 import { UtilService } from 'src/app/services/util.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import Swal from "sweetalert2";
+
+
+interface ProSettings {
+  bidType: string;
+  auctionAmount: number;
+  approved: boolean;
+  minBidAmount: number;
+  maxBidAmount: number;
+  displayRange: number;
+  id: number;
+  worthAmount: number;
+}
 @Component({
   selector: "app-admin-auction-product",
   templateUrl: "./admin-auction-product.component.html",
@@ -22,13 +35,15 @@ export class AdminAuctionProductComponent implements OnInit {
   last = false;
   numberOfElements = 10;
   contentEmpty = false;
-  adminMarkup=0;
-  proId=0;
+  adminMarkup = 0;
+  proId = 0;
   form: FormGroup;
-   constructor(private crudService: CrudService, private router: Router, private util: UtilService) { }
+  proSets: ProSettings = {} as ProSettings;
+
+  constructor(private crudService: CrudService, private router: Router, private util: UtilService) { }
 
   ngOnInit() {
-     
+
     this.findAllProduct();
   }
 
@@ -75,8 +90,8 @@ export class AdminAuctionProductComponent implements OnInit {
     return t ? 'YES' : 'NO';
   }
 
-  setMarkup(id,markup){
-    this.proId=id;
+  setMarkup(id, markup) {
+    this.proId = id;
     this.adminMarkup = markup;
   }
   productSettings(pro) {
@@ -88,29 +103,72 @@ export class AdminAuctionProductComponent implements OnInit {
   editProduct(pro) { }
 
   setProduct(pro) {
+
     this.product = pro;
+    console.log(' pross: ', this.product);
+    this.proSets.approved = pro.approved;
+    this.proSets.auctionAmount = pro.auctionAmount;
+    this.proSets.bidType = pro.bidType;
+    this.proSets.displayRange = pro.displayRange;
+    this.proSets.maxBidAmount = pro.maxBidAmount;
+    this.proSets.minBidAmount = pro.minBidAmount;
+    this.proSets.id = pro.id;
+    this.proSets.worthAmount = pro.worthAmount;
   }
 
 
   updateMarkup() {
-    const data = {
-      id: this.proId,
-      adminMarkupPercentage: this.adminMarkup
-    };
-    console.log(data);
-    this.crudService
-      .postAll("product/updateproductadminmarkup", data)
+    const sets = this.proSets;
+    console.log(this.proSets);
+    if (sets.approved) {
+      // Ready to publish
+      if (sets.worthAmount <= 0) {
+        this.util.dynamicToast(1, 'Worth Amount can not be 0 or empty');
+        return;
+      }
+
+      if (sets.bidType === 'BIDTYPE_B') {
+        if (sets.maxBidAmount <= 0) {
+          this.util.dynamicToast(1, 'Max Bid Amount can not be 0 or empty');
+          return;
+        }
+        if (sets.minBidAmount <= 0) {
+          this.util.dynamicToast(1, 'Min Bid Amount can not be 0 or empty');
+          return;
+        }
+        if (sets.displayRange <= 0) {
+          this.util.dynamicToast(1, 'Display Range  can not be 0 or empty');
+          return;
+        }
+      }
+    }
+
+    Swal.fire({
+      title: "Please confirm",
+      text: 'Are you sure you want Update? ',
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ok"
+    }).then(result => {
+      if(result.value==true){
+            this.crudService
+      .postAll('auctionproduct/adminupdate', this.proSets)
       .then((res: any) => {
 
-        this.util.dynamicToast(res.code,res.message);
+        this.util.dynamicToast(res.code, res.message);
         console.log(res);
-        
+        this.findAllProduct();
+
       })
       .catch((err: any) => {
-        this.util.toast('error',err.message);
+        this.util.toast('error', err.message);
         console.log(err);
       });
-  }
+      }
+    });
 
-   
+  }
+ 
 }

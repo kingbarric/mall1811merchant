@@ -1,31 +1,30 @@
-
 <div class="container">
 
-    <div class="row px-3 py-2">
-      <div class="col-md-6">
-        <h2>List of products On Auction</h2>
-      </div>
-      <div class="col-md-6">
-        <div class="wrap mt-1">
-          <div class="search">
-            <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search"
-              [(ngModel)]="filter">
-            <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
+  <div class="row px-3 py-2">
+    <div class="col-md-6">
+      <h2>List of products On Auction</h2>
+    </div>
+    <div class="col-md-6">
+      <div class="wrap mt-1">
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="What product are you looking for?" name="search"
+            [(ngModel)]="filter">
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
       </div>
     </div>
-  
-    <table class="table table-bordered table-hover">
-      <tbody>
-        <tr>
-          <th>ID</th>
-          <th>Product</th>
-          <th>Bid Type</th>
-          <th>AuctionAmount</th>
-          <!-- <th>Discount
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <tbody>
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Bid Type</th>
+        <th>AuctionAmount</th>
+        <!-- <th>Discount
             bidType: "BIDTYPE_A"
 auctionAmount: 1500
 minBidAmount: 200
@@ -36,152 +35,161 @@ approved: true
 totalSlot: 10
 slotted: 10
 worthAmount: 0 Price</th> -->
-          <!-- <th>Approved</th> -->
-           <th>Close Status</th> 
-          <th>Approve Status</th>
-            <th>Total Slot</th>
-          
-          <th>Slotted</th>
-          <th>WorthAmount</th>
-          <th>Merchant Code</th>
-         
-          <th>Settings</th>
-        </tr>
-        <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
-        <tr *ngFor="let pro of products; let i = index ">
-          <td>{{pro?.id}}</td>
-          <td >{{pro?.productId.name }} <a (click)="setProduct(pro.productId)" data-toggle="modal"
-             data-target=".product-modal" class="btn btn-secondary btn-link"  ><i class="fa fa-search"></i></a> </td>
-           <td>{{pro?.bidType}}</td>  
-          <!-- <td>{{pro?.approved}}</td> -->
-          <td>{{pro?.auctionAmount}}</td>
-          <td>{{showText(pro?.isClosed)}}</td>
-          <td>{{showText(pro?.approved)}}</td>
-          
-          <td>{{pro?.totalSlot}}</td>
-          <td>
-            {{pro?.slotted}}
-           </td>
-           <td>
-              {{pro?.worthAmount}}
-             </td>
-             <td>
-                {{pro?.productId.merchantId.id}}
-               </td>
-               <td>
-                  <button class="btn btn-primary btn-xs" (click)="setProduct(pro)" data-toggle="modal" data-target=".bd-settings-modal-lg">Settings</button>
-                 </td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="paginate-tabs">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li  [ngClass]="first?'page-item disabled':'page-item'"  ><a class="page-link" href="#" [ngDisabled]="first" (click)="goPrevious($event)">Previous</a></li>
-              <li class="page-item" *ngFor="let p of totalPages; let i = index"><a class="page-link" (click)="gotoPage(i,$event)" href="#">{{i+1}}</a></li>
-             
-              <li  [ngClass]="last?'page-item disabled':'page-item'"><a class="page-link" href="#" (click)="goNext($event)" [disable]="!last">Next</a></li>
-            </ul>
-            Page {{pageNumber+1}} of {{totalPages.length}} , total products {{totalElements}}
-          </nav>
-    </div>
-  </div>
-  
-  
-  <app-product-dialog [product]="product"></app-product-dialog>
- 
+        <!-- <th>Approved</th> -->
+        <th>Close Status</th>
+        <th>Approve Status</th>
+        <th>Total Slot</th>
 
-  <div class="modal fade bd-settings-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="m-2 p-5">
-            <div class="container">
-                <form>
-                  <h2>Setings For Bidding</h2>
-                  <div class="row">
-                    <div class="col-md-6">
-                        <label for="contact-preference">Bidding type</label>
-                        <div class="radio">
-                          <label>
-                            <input type="radio" class="pr-3" name="contact-preference" id="contact-preference" value="TYPE_A" checked>Type A
-                          </label>
-                        </div>
-                        <div class="radio">
-                          <label>
-                            <input class="pr-3" type="radio" name="contact-preference" id="contact-preference" value="TYPE_B" checked>Type B
-                          </label>
-                        </div>
-                
-                    </div>
-                    <!--  col-md-6   -->
-              
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="last">Auction Amount</label>
-                        <input type="text" (ngModel)="product.auctionAmount" class="form-control" placeholder="" id="last">
-                      </div>
-                      <div>
-                        <select name="approve"(ngModel)="product.approved" >
-                        <option value="true">Approve</option>
-                        <option value="false">Dis Approve</option>
-                      </select>
-                      </div>
-                      
-                    </div>
-                    <!--  col-md-6   -->
-                  </div>
-              
-              
-                  <div class="row">
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="company">Minimum Bid Amount</label>
-                        <input type="number" (ngModel)="product.minBidAmount" class="form-control" placeholder="Minimum Bid Amount" id="minBidAmount">
-                        <!-- <span class="help-block">Minimum Amount Player can bid with.</span> -->
-                      </div>
-              
-              
-                    </div>
-                    <!--  col-md-6   -->
-              
-                    <div class="col-md-4">
-              
-                      <div class="form-group">
-                        <label for="maxBidAmount">Maximum Bid Amount</label>
-                        <input type="number" (ngModel)="product.maxBidAmount" class="form-control" id="maxBidAmount" placeholder="Max Amount">
-                        
-                      </div>
-                    </div>
-                    <!--  col-md-6   -->
-                     <!--  col-md-6   -->
-              
-                     <div class="col-md-4">
-              
-                        <div class="form-group">
-                          <label for="displayRange">Display Range</label>
-                          <input type="number" class="form-control" value="product.displayRange" (ngModel)="product.displayRange" id="displayRange" placeholder="displayRange">
-                        </div>
-                      </div>
-                      <!--  col-md-6   -->
-                  </div>
-                  <!--  row   -->
-              
-              
-                  <div class="row">
-                    <div class="col-md-8">
-               
-                    </div>
-                    <!--  col-md-6   -->
-               
-                  </div>
-                  <!--  row   -->
-               
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+        <th>Slotted</th>
+        <th>WorthAmount</th>
+        <th>Merchant Code</th>
+
+        <th>Settings</th>
+      </tr>
+      <!-- <tr *ngFor="let pro of products | filter:filter; let i = index "> -->
+      <tr *ngFor="let pro of products; let i = index ">
+        <td>{{pro?.id}}</td>
+        <td>{{pro?.productId.name }} <a (click)="setProduct(pro.productId)" data-toggle="modal"
+            data-target=".product-modal" class="btn btn-secondary btn-link"><i class="fa fa-search"></i></a> </td>
+        <td>{{pro?.bidType}}</td>
+        <!-- <td>{{pro?.approved}}</td> -->
+        <td>{{pro?.auctionAmount}}</td>
+        <td>{{showText(pro?.isClosed)}}</td>
+        <td>{{showText(pro?.approved)}}</td>
+
+        <td>{{pro?.totalSlot}}</td>
+        <td>
+          {{pro?.slotted}}
+        </td>
+        <td>
+          {{pro?.worthAmount}}
+        </td>
+        <td>
+          {{pro?.productId.merchantId.id}}
+        </td>
+        <td>
+          <button class="btn btn-primary btn-xs" (click)="setProduct(pro)" data-toggle="modal"
+            data-target=".bd-settings-modal-lg">Settings</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="paginate-tabs">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li [ngClass]="first?'page-item disabled':'page-item'"><a class="page-link" href="#" [ngDisabled]="first"
+            (click)="goPrevious($event)">Previous</a></li>
+        <li class="page-item" *ngFor="let p of totalPages; let i = index"><a class="page-link"
+            (click)="gotoPage(i,$event)" href="#">{{i+1}}</a></li>
+
+        <li [ngClass]="last?'page-item disabled':'page-item'"><a class="page-link" href="#" (click)="goNext($event)"
+            [disable]="!last">Next</a></li>
+      </ul>
+      Page {{pageNumber+1}} of {{totalPages.length}} , total products {{totalElements}}
+    </nav>
+  </div>
+</div>
+
+
+<app-product-dialog [product]="product"></app-product-dialog>
+
+
+<div class="modal fade bd-settings-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="m-2 p-5">
+        <div class="container">
+
+          <h2>Setings For Bidding</h2>
+          <div class="row">
+            <div class="col-md-4">
+              <label for="contact-preference">Bidding type</label>
+              <div class="radio">
+                <label>
+                  <input [(ngModel)]="proSets.bidType" type="radio" class="pr-3" name="bidType-preference"
+                    id="contact-preference" value="BIDTYPE_A" checked>Type A 
+                    <span data-tip="Default for bidding, with fixed grid system of 208 ">
+                      <i class="fa fa-info-circle" aria-hidden="true" ></i>
+                    </span>
+                    
+                     
+                </label>
               </div>
-          <div>
+              <div class="radio">
+                <label>
+                  <input class="pr-3" [(ngModel)]="proSets.bidType" type="radio" name="bidType-preference"
+                    id="contact-preference" value="BIDTYPE_B" checked>Type B
+                    <span data-tip="Manual grid system where the admin enters the minimum and the maximum bid amount, then the display Grid">
+                        <i class="fa fa-info-circle" aria-hidden="true" ></i>
+                      </span>
+                </label>
+              </div>
+
+            </div>
+            <!--  col-md-6   -->
+
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="last">Auction Amount</label>
+                        <input type="text" disabled [(ngModel)]="proSets.auctionAmount" class="form-control" placeholder="" id="last">
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="last">Auction Worth Amount</label>
+                        <input type="text" [(ngModel)]="proSets.worthAmount" class="form-control" placeholder="" id="worthAmount">
+                      </div>
+                  </div>
+              </div>
+              
+              <div>
+                <select name="approve" class="form-control" [(ngModel)]="proSets.approved">
+                  <option [ngValue]="true">Approved</option>
+                  <option [ngValue]="false">Dis Approved</option>
+                </select>
+              </div> 
+            </div> 
+          </div> 
+          <div class="row" *ngIf="proSets.bidType==='BIDTYPE_B'">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label for="company">Minimum Bid Amount</label>
+                <input type="text" [(ngModel)]="proSets.minBidAmount" class="form-control"
+                  placeholder="Minimum Bid Amount" id="minBidAmount">
+
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <div class="form-group">
+                <label for="maxBidAmount">Maximum Bid Amount</label>
+                <input type="number" [(ngModel)]="proSets.maxBidAmount" class="form-control" id="maxBidAmount"
+                  placeholder="Max Amount">
+
+              </div>
+            </div>
+            <div class="col-md-4">
+
+              <div class="form-group">
+                <label for="displayRange">Display Range</label>
+                <input type="number" class="form-control" [(ngModel)]="proSets.displayRange" id="displayRange"
+                  placeholder="displayRange">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" (click)="updateMarkup()">Submit</button>
+
+        </div>
+        <div>
         </div>
       </div>
     </div>
   </div>
-  

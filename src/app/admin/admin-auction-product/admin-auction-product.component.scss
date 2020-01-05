@@ -1,0 +1,37 @@
+[data-tip] {
+    border-bottom: 1px dashed;
+    color: tomato;
+    cursor: help;
+    position: relative;
+    &::before, &::after {
+        opacity: 0;
+        display: block;
+        position: absolute;
+        right: 0;
+        transition:  .3s opacity ease-out;
+        
+    }
+    &:hover::before, &:hover::after {
+            opacity: 1;
+            z-index: 1;
+        }
+    &::before {
+        color: #222;
+        content: attr(data-tip);       
+        bottom: calc(100% + 14px);
+        width: 35ch;
+        font-size: 15px;
+        background-color: tomato;
+        border-radius: 4px 4px 0 4px;
+        padding: 15px;
+        z-index: -1;
+    }
+    &::after {
+        content: "";
+        width: 0;
+        bottom: 100%;
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid tomato;
+    }
+}
